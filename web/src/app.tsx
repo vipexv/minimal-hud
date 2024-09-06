@@ -24,9 +24,6 @@ export function App() {
         debug(`(App) NUI message received: setVisible ${state}`);
     });
 
-    // Waits for the ESC Key to be triggered and closes the NUI.
-    useExitListener(setVisible);
-
     // Grabs any necessery data from the client once the app is loaded.
     useEffect(() => {
         fetchNui("uiLoaded")

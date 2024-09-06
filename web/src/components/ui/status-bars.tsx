@@ -1,21 +1,25 @@
 import { TiHeartFullOutline } from "react-icons/ti";
+import { useMemo } from "react";
 
 interface StatBarProps {
-    icon: React.ReactNode;
-    value: number;
-    maxValue: number;
-    color: string;
+    icon?: React.ReactNode;
+    value?: number;
+    maxValue?: number;
+    color?: string;
     vertical?: boolean;
 }
 
-export const StatBar: React.FC<StatBarProps> = ({
+export const StatBar = ({
     icon = <TiHeartFullOutline size={20} />,
     value = 20,
     maxValue = 100,
-    color = "#747bff",
+    color = "#94f024",
     vertical = false,
-}) => {
-    const percentage = (value / maxValue) * 100;
+}: StatBarProps) => {
+    const percentage = useMemo(
+        () => (value / maxValue) * 100,
+        [value, maxValue]
+    );
 
     return (
         <div
@@ -23,26 +27,102 @@ export const StatBar: React.FC<StatBarProps> = ({
                 vertical ? "flex-col h-24" : "w-full"
             } items-center gap-1`}
         >
-            {icon}
-            {!vertical && <span className="text-xs font-medium">{value}</span>}
+            <div className={`text-white/70`}>{icon}</div>
+            {!vertical && (
+                <p
+                    className="text-xs w-[20px] text-center font-medium"
+                    style={{
+                        color: color,
+                    }}
+                >
+                    {value}
+                </p>
+            )}
             <div
                 className={`relative ${
-                    vertical
-                        ? "h-full w-2 rounded-[1px]"
-                        : "w-full  rounded-[4px] ml-1 h-4"
-                } bg-black/20 overflow-hidden`}
+                    vertical ? "h-full w-2" : "w-full ml-1 h-2"
+                } bg-black/20 rounded-[1px] overflow-hidden`}
             >
                 <div
-                    className={`absolute  ${
-                        vertical
-                            ? "bottom-0 rounded-[1px] w-full"
-                            : "left-0 h-full  rounded-[4px]"
-                    } rounded-[4px] transition-all duration-300 ease-in-out`}
+                    className={`absolute ${
+                        vertical ? "bottom-0 w-full" : "left-0 h-full"
+                    } transition-all duration-300 rounded-[1px] ease-in-out`}
                     style={{
                         backgroundColor: color,
                         [vertical ? "height" : "width"]: `${percentage}%`,
                     }}
                 />
+            </div>
+        </div>
+    );
+};
+
+interface StatBarSegmentedProps {
+    icon?: React.ReactNode;
+    value?: number;
+    color?: string;
+}
+
+export const StatBarSegmented = ({
+    icon = <TiHeartFullOutline size={20} />,
+    value = 20,
+    color = "#94f024",
+}: StatBarSegmentedProps) => {
+    const segments = 4;
+    const segmentWidth = 100 / segments;
+
+    const segmentFills = useMemo(
+        () =>
+            Array.from({ length: segments }, (_, i) => {
+                const segmentMaxValue = ((i + 1) * 100) / segments;
+                if (value >= segmentMaxValue) {
+                    return 100;
+                } else if (value > (i * 100) / segments) {
+                    return (
+                        ((value - (i * 100) / segments) / segmentWidth) * 100
+                    );
+                } else {
+                    return 0;
+                }
+            }),
+        [value, segments, segmentWidth]
+    );
+
+    return (
+        <div className="flex items-center gap-1 w-full">
+            <div className="text-white/70">{icon}</div>
+            <p
+                className="text-xs w-[20px] text-center font-medium"
+                style={{ color: color }}
+            >
+                {value}
+            </p>
+            <div className="relative flex gap-1 w-full ml-1 h-[8px] rounded-[1px]">
+                {segmentFills.map((fill, index) => (
+                    <svg
+                        key={index}
+                        width="100%"
+                        height="100%"
+                        viewBox="0 0 100 24"
+                        preserveAspectRatio="none"
+                    >
+                        <rect
+                            x="0"
+                            y="0"
+                            width="100"
+                            height="24"
+                            fill="#1d1d1d"
+                        />
+                        <rect
+                            x="0"
+                            y="0"
+                            width={fill}
+                            height="24"
+                            fill={color}
+                            className={"transition-all"}
+                        />
+                    </svg>
+                ))}
             </div>
         </div>
     );
