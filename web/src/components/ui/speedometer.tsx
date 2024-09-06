@@ -7,7 +7,7 @@ export default function Component(
     { speed, maxSpeed }: SpeedometerProps = { speed: 92, maxSpeed: 160 }
 ) {
     const percentage = (speed / maxSpeed) * 100;
-    const arcLength = 240; // 240 degrees arc
+    const arcLength = 240;
     const segments = 12;
     const segmentAngle = arcLength / segments;
 
