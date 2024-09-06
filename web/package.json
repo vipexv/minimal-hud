@@ -1,0 +1,27 @@
+{
+    "name": "preact-resource-template",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc -b && vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "preact": "^10.23.2",
+        "react": "npm:@preact/compat",
+        "react-dom": "npm:@preact/compat",
+        "jotai": "~2.9.3"
+    },
+    "devDependencies": {
+        "@preact/preset-vite": "^2.9.0",
+        "@types/node": "^20.16.5",
+        "autoprefixer": "^10.4.20",
+        "postcss": "^8.4.45",
+        "rollup-plugin-visualizer": "^5.12.0",
+        "tailwindcss": "^3.4.10",
+        "typescript": "^5.5.4",
+        "vite": "^5.4.3"
+    }
+}

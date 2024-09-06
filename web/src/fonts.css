@@ -1,0 +1,55 @@
+/* We aren't using variable fonts because in FiveM it doesn't work properly (so far for me), the weight is always the same and we cannot make it bolder or lighter somehow, so the solution is to defiine all the weights manually aka Static fonts. */
+
+@font-face {
+    font-family: "Geist";
+    src: url("/fonts/Geist-UltraBlack.woff2");
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: "Geist";
+    src: url("/fonts/Geist-Black.woff2");
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: "Geist";
+    src: url("/fonts/Geist-Bold.woff2");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "Geist";
+    src: url("/fonts/Geist-SemiBold.woff2");
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "Geist";
+    src: url("/fonts/Geist-Medium.woff2");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "Geist";
+    src: url("/fonts/Geist-Regular.woff2");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Geist";
+    src: url("/fonts/Geist-Light.woff2");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Geist";
+    src: url("/fonts/Geist-Thin.woff2");
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: "Geist";
+    src: url("/fonts/Geist-UltraLight.woff2");
+    font-weight: 100;
+}
