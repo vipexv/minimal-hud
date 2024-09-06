@@ -1,9 +1,11 @@
 import { useNuiEvent } from "@/hooks/useNuiEvent.ts";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { CarHud } from "./components/car-hud";
+import { PlayerStatus } from "./components/player-status";
 import { useExitListener } from "./hooks/useExitListener";
-import { isEnvBrowser } from "./utils/misc";
 import { debug, setDebugMode } from "./utils/debug";
 import { fetchNui } from "./utils/fetchNui";
+import { isEnvBrowser } from "./utils/misc";
 
 if (isEnvBrowser()) {
     const body = document.body;
@@ -43,7 +45,8 @@ export function App() {
 
     return (
         <>
-            <p className="text-5xl font-geist">Hello World!</p>
+            <PlayerStatus />
+            <CarHud />
         </>
     );
 }
