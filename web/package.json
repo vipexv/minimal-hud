@@ -9,10 +9,11 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "jotai": "~2.9.3",
         "preact": "^10.23.2",
         "react": "npm:@preact/compat",
         "react-dom": "npm:@preact/compat",
-        "jotai": "~2.9.3"
+        "react-icons": "^5.3.0"
     },
     "devDependencies": {
         "@preact/preset-vite": "^2.9.0",
