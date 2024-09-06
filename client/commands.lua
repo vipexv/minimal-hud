@@ -1,5 +1,5 @@
 local interface = require("modules.interface.client")
 
 RegisterCommand("togglehud", function()
-    interface.toggleHud()
+    interface.toggle()
 end, false)
