@@ -15,7 +15,12 @@ if (isEnvBrowser()) {
 export function App() {
     const [visible, setVisible] = useState(true);
 
-    useNuiEvent("setVisible", setVisible);
+    useNuiEvent("setVisible", (state) => {
+        const newState = state === null ? !visible : state;
+        setVisible(newState);
+
+        debug(`(App) NUI message received: setVisible ${state}`);
+    });
 
     // Waits for the ESC Key to be triggered and closes the NUI.
     useExitListener(setVisible);

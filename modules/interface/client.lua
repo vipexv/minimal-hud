@@ -9,9 +9,12 @@ interface.message = function(action, data)
     })
 end
 
----@param shouldShow boolean
+---@param shouldShow boolean?
 interface.toggle = function(shouldShow)
-    SetNuiFocus(shouldShow, shouldShow)
+    if not shouldShow then
+        shouldShow = nil
+    end
+
     interface.message("setVisible", shouldShow)
 end
 
