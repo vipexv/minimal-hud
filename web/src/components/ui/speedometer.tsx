@@ -96,7 +96,7 @@ export default function Component(
                                     endAngle
                                 )}
                                 fill="none"
-                                stroke={isActive ? "#8ebd40" : "#11181a27"}
+                                stroke={isActive ? "#94f024" : "#11181a27"}
                                 strokeWidth="5"
                             />
                         );
