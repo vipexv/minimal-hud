@@ -48,7 +48,7 @@ export const StatBar = ({
                 <div
                     className={`absolute ${
                         vertical ? "bottom-0 w-full" : "left-0 h-full"
-                    } transition-allduration-300 rounded-[1px] ease-in-out`}
+                    } transition-all rounded-[1px] ease-in-out`}
                     style={{
                         backgroundColor: color,
                         [vertical ? "height" : "width"]: `${percentage}%`,

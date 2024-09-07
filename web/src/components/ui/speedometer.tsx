@@ -1,13 +1,18 @@
 interface SpeedometerProps {
     speed: number;
     maxSpeed: number;
+    rpm: number;
     props?: React.HTMLAttributes<HTMLDivElement>;
 }
 
 export default function Speedometer(
-    { speed, maxSpeed, props }: SpeedometerProps = { speed: 92, maxSpeed: 160 }
+    { speed, maxSpeed, rpm, props }: SpeedometerProps = {
+        speed: 92,
+        maxSpeed: 160,
+        rpm: 50,
+    }
 ) {
-    const percentage = (speed / maxSpeed) * 100;
+    const percentage = (rpm / maxSpeed) * 100;
     const arcLength = 240;
     const segments = 12;
     const segmentAngle = arcLength / segments;
@@ -124,7 +129,7 @@ export default function Speedometer(
             <div className="absolute inset-0 flex items-center justify-center -skew-x-[10deg]">
                 <div className="text-center flex flex-col">
                     <span className="text-4xl font-bold text-white tabular-nums">
-                        {speed}
+                        {rpm}
                     </span>
                     <span className="text-xl -mt-1 font-semibold text-gray-400">
                         MPH

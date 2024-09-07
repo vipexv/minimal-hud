@@ -18,10 +18,13 @@ export function App() {
     const [visible, setVisible] = useState(true);
 
     useNuiEvent("setVisible", (state) => {
-        const newState = state === null ? !visible : state;
+        const newState = state === "toggle" ? !visible : state;
         setVisible(newState);
 
-        debug(`(App) NUI message received: setVisible ${state}`);
+        debug(
+            `(App) NUI message received: setVisible ${state}`,
+            `newState: ${newState}`
+        );
     });
 
     useEffect(() => {
@@ -31,6 +34,9 @@ export function App() {
             })
             .catch((err) => {
                 console.error(err);
+            })
+            .finally(() => {
+                debug("(App) fetched uiLoaded callback");
             });
     }, []);
 

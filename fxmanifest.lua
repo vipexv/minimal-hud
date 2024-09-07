@@ -30,6 +30,8 @@ files {
     "config/shared.lua",
     "modules/interface/client.lua",
     "modules/utils/shared.lua",
+    "modules/threads/client/**/*.lua",
+    "data/mapData.lua",
 }
 
 lua54 "yes"
