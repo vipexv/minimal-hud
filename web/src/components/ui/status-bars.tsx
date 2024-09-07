@@ -15,6 +15,7 @@ export const StatBar = ({
     maxValue = 100,
     color = "#94f024",
     vertical = false,
+    ...props
 }: StatBarProps) => {
     const percentage = useMemo(
         () => (value / maxValue) * 100,
@@ -26,6 +27,7 @@ export const StatBar = ({
             className={`flex ${
                 vertical ? "flex-col h-24" : "w-full"
             } items-center gap-1`}
+            {...props}
         >
             <div className={`text-white/70`}>{icon}</div>
             {!vertical && (

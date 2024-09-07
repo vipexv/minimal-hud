@@ -4,6 +4,7 @@ export const TextProgressBar = ({
     value = 50,
     label = "FUEL",
     color = "#94f024",
+    ...props
 }: {
     value?: number;
     label?: string;
@@ -20,6 +21,7 @@ export const TextProgressBar = ({
             className={
                 "flex flex-col items-center justify-center w-[2.5dvw] h-[4dvh] -skew-x-[10deg]"
             }
+            {...props}
         >
             <h1 className={"uppercase text-base font-geist font-bold"}>
                 {label}
