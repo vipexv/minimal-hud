@@ -20,7 +20,6 @@ function PlayerStatusThread.new(identifier)
 end
 
 function PlayerStatusThread:getIsVehicleThreadRunning()
-  debug("(PlayerStatusThread:getIsVehicleThreadRunning), Returning: ", self.isVehicleThreadRunning)
   return self.isVehicleThreadRunning
 end
 
@@ -30,7 +29,7 @@ function PlayerStatusThread:setIsVehicleThreadRunning(value)
 end
 
 function PlayerStatusThread:start(vehicleStatusThread)
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while true do
       local ped = PlayerPedId()
       local coords = GetEntityCoords(ped)
