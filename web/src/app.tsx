@@ -6,6 +6,7 @@ import { useExitListener } from "./hooks/useExitListener";
 import { debug, setDebugMode } from "./utils/debug";
 import { fetchNui } from "./utils/fetchNui";
 import { isEnvBrowser } from "./utils/misc";
+import { Compass } from "./components/compass";
 
 if (isEnvBrowser()) {
     const body = document.body;
@@ -44,6 +45,7 @@ export function App() {
         <>
             <PlayerStatus />
             <CarHud />
+            <Compass />
         </>
     );
 }

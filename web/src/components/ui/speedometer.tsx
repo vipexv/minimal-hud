@@ -3,7 +3,7 @@ interface SpeedometerProps {
     maxSpeed: number;
 }
 
-export default function Component(
+export default function Speedometer(
     { speed, maxSpeed }: SpeedometerProps = { speed: 92, maxSpeed: 160 }
 ) {
     const percentage = (speed / maxSpeed) * 100;
