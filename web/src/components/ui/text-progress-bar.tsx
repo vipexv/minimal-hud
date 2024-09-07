@@ -4,11 +4,12 @@ export const TextProgressBar = ({
     value = 50,
     label = "FUEL",
     color = "#94f024",
-    ...props
+    props,
 }: {
     value?: number;
     label?: string;
     color?: string;
+    props?: React.HTMLAttributes<HTMLDivElement>;
 }) => {
     const getColor = useMemo(() => {
         if (value <= 20) return "#f70101";

@@ -7,6 +7,7 @@ interface StatBarProps {
     maxValue?: number;
     color?: string;
     vertical?: boolean;
+    props?: React.HTMLAttributes<HTMLDivElement>;
 }
 
 export const StatBar = ({
@@ -15,7 +16,7 @@ export const StatBar = ({
     maxValue = 100,
     color = "#94f024",
     vertical = false,
-    ...props
+    props,
 }: StatBarProps) => {
     const percentage = useMemo(
         () => (value / maxValue) * 100,
@@ -63,12 +64,14 @@ interface StatBarSegmentedProps {
     icon?: React.ReactNode;
     value?: number;
     color?: string;
+    props?: React.HTMLAttributes<HTMLDivElement>;
 }
 
 export const StatBarSegmented = ({
     icon = <TiHeartFullOutline size={20} />,
     value = 20,
     color = "#94f024",
+    props,
 }: StatBarSegmentedProps) => {
     const segments = 4;
     const segmentWidth = 100 / segments;
@@ -91,7 +94,7 @@ export const StatBarSegmented = ({
     );
 
     return (
-        <div className="flex items-center gap-1 w-full">
+        <div className="flex items-center gap-1 w-full" {...props}>
             <div className="text-white/70">{icon}</div>
             <p
                 className="text-xs w-[20px] text-center font-bold"

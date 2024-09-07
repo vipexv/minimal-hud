@@ -9,6 +9,7 @@ interface IconLabelBoxProps {
     className?: string;
     textClassName?: string;
     iconClassName?: string;
+    props: React.HTMLAttributes<HTMLDivElement>;
 }
 
 const IconLabelBox = ({
@@ -17,7 +18,7 @@ const IconLabelBox = ({
     className = "",
     textClassName = "",
     iconClassName = "",
-    ...props
+    props,
 }: IconLabelBoxProps) => {
     return (
         <div

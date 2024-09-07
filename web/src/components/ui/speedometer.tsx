@@ -1,10 +1,11 @@
 interface SpeedometerProps {
     speed: number;
     maxSpeed: number;
+    props?: React.HTMLAttributes<HTMLDivElement>;
 }
 
 export default function Speedometer(
-    { speed, maxSpeed }: SpeedometerProps = { speed: 92, maxSpeed: 160 }
+    { speed, maxSpeed, props }: SpeedometerProps = { speed: 92, maxSpeed: 160 }
 ) {
     const percentage = (speed / maxSpeed) * 100;
     const arcLength = 240;
@@ -62,7 +63,10 @@ export default function Speedometer(
     };
 
     return (
-        <div className="w-60 h-64 relative flex items-center justify-center -mb-20 z-0">
+        <div
+            className="w-60 h-64 relative flex items-center justify-center -mb-20 z-0"
+            {...props}
+        >
             <svg
                 viewBox="0 0 100 100"
                 preserveAspectRatio="none"
