@@ -4,6 +4,7 @@ export interface VehicleStateInterface {
     speed: number;
     rpm: number;
     engine: number;
+    gears: number;
     fuel: number;
 }
 
@@ -11,6 +12,7 @@ const mockVehicleState: VehicleStateInterface = {
     speed: 42,
     rpm: 20,
     engine: 50,
+    gears: 8,
     fuel: 50,
 };
 

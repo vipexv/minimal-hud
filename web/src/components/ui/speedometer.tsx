@@ -4,16 +4,17 @@ interface SpeedometerProps {
     speed: number;
     maxRpm: number;
     rpm: number;
+    gears: number;
     props?: React.HTMLAttributes<HTMLDivElement>;
 }
 
-export default function Component(
-    { speed, maxRpm, rpm, props }: SpeedometerProps = {
-        speed: 42,
-        maxRpm: 100,
-        rpm: 50,
-    }
-) {
+export default function Speeddometer({
+    speed = 42,
+    maxRpm = 100,
+    rpm = 20,
+    props,
+    gears = 8,
+}: SpeedometerProps) {
     const percentage = (rpm / maxRpm) * 100;
     const arcLength = 240;
     const activeArcRef = useRef<SVGPathElement>(null);
@@ -110,13 +111,18 @@ export default function Component(
                         ref={activeArcRef}
                         d={createArc(0, 0, 40, -120, 120)}
                         fill="none"
-                        stroke="#94f024"
                         strokeWidth="5"
-                        className="transition-all duration-300 ease-in-out"
+                        className={`transition-all duration-300 ease-in-out ${
+                            percentage >= 80
+                                ? "stroke-red-600"
+                                : percentage >= 50
+                                ? "stroke-yellow-500"
+                                : "stroke-primary"
+                        }`}
                     />
                 </g>
-                {[...Array(8)].map((_, i) => {
-                    const angle = -120 + (i * 240) / 7;
+                {[...Array(gears)].map((_, i) => {
+                    const angle = -120 + (i * 240) / (gears - 1);
                     return (
                         <g key={`gear-${i}`}>
                             <path
