@@ -25,7 +25,6 @@ export function App() {
         debug(`(App) NUI message received: setVisible ${state}`);
     });
 
-    // Grabs any necessery data from the client once the app is loaded.
     useEffect(() => {
         fetchNui("uiLoaded")
             .then((res) => {
