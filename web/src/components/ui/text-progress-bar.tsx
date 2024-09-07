@@ -9,7 +9,6 @@ export const TextProgressBar = ({
     label?: string;
     color?: string;
 }) => {
-    // Memoize color calculation
     const getColor = useMemo(() => {
         if (value <= 20) return "#f70101";
         if (value <= 50) return "#f7e300";
