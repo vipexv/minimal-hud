@@ -1,4 +1,6 @@
 -- Core Logic
-local playerStatusThread = require("modules.threads.client.playerStatus")
+local playerStatusClass = require("modules.threads.client.playerStatus")
 
-CreateThread(playerStatusThread)
+-- local playerStatus = playerStatusClass.new("main")
+
+-- playerStatus:start()
