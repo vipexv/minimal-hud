@@ -21,7 +21,7 @@ const IconLabelBox = ({
     return (
         <div
             className={twMerge(
-                `flex items-center h-[3.2dvh] justify-center text-primary bg-black/80 rounded-[8px] p-[6px] min-w-[5dvw]`,
+                `flex items-center h-[3.2dvh] justify-center text-primary bg-black/50 rounded-[8px] p-[6px] min-w-[5dvw]`,
                 className
             )}
         >

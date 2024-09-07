@@ -6,7 +6,7 @@ export const PlayerStatus = () => {
     return (
         <div
             className={
-                "absolute bottom-2 left-1 flex w-[20dvw] flex-col items-center justify-center gap-1 -skew-y-[1deg] "
+                "absolute bottom-2 left-1 flex w-[15dvw] flex-col items-center justify-center gap-1 -skew-y-[1deg] "
             }
         >
             <StatBarSegmented
