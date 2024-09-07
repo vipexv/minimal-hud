@@ -1,38 +1,43 @@
 ---@diagnostic disable: cast-local-type
-local mapData = require 'data.mapData'
+local mapData = require('data.mapData')
 local debug = require("modules.utils.shared").debug
 local interface = require("modules.interface.client")
-local vehicleStatusThread = require("modules.threads.client.vehicleStatusThread")
 
 local PlayerStatusThread = {}
 PlayerStatusThread.__index = PlayerStatusThread
 
+-- Registry for storing instances
 PlayerStatusThread.registry = {}
 
+-- Constructor to create a new instance
 function PlayerStatusThread.new(identifier)
   local self = setmetatable({}, PlayerStatusThread)
   self.identifier = identifier
   self.isVehicleThreadRunning = false
 
+  -- Register the instance
   PlayerStatusThread.registry[identifier] = self
 
   debug("(PlayerStatusThread:new) Created new instance with identifier: ", identifier)
   return self
 end
 
+-- Getter for `isVehicleThreadRunning`
 function PlayerStatusThread:getIsVehicleThreadRunning()
   debug("(PlayerStatusThread:getIsVehicleThreadRunning) identifier: ", self.identifier)
   debug("(PlayerStatusThread:getIsVehicleThreadRunning), Returning: ", self.isVehicleThreadRunning)
   return self.isVehicleThreadRunning
 end
 
+-- Setter for `isVehicleThreadRunning`
 function PlayerStatusThread:setIsVehicleThreadRunning(value)
   debug("(PlayerStatusThread:setIsVehicleThreadRunning) Setting: ", value)
   self.isVehicleThreadRunning = value
 end
 
-function PlayerStatusThread:start()
-  CreateThread(function()
+-- Method to start the player status thread
+function PlayerStatusThread:start(vehicleStatusThread)
+  Citizen.CreateThread(function()
     while true do
       local ped = PlayerPedId()
       local coords = GetEntityCoords(ped)
@@ -67,9 +72,10 @@ function PlayerStatusThread:start()
       local pedHealth = math.floor(GetEntityHealth(ped) / GetEntityMaxHealth(ped) * 100)
       local isInVehicle = IsPedInAnyVehicle(ped, false)
 
+      -- Check if vehicle status thread should be started
       if isInVehicle and not self:getIsVehicleThreadRunning() and vehicleStatusThread then
-        vehicleStatusThread()
-        debug("(playerStatus) (vehicleStatusThread) Vehicle status thread called.")
+        vehicleStatusThread:start() -- Call the start method of vehicleStatusThread
+        debug("(playerStatus) (vehicleStatusThread) Vehicle status thread started.")
       end
 
       local data = {
@@ -88,6 +94,7 @@ function PlayerStatusThread:start()
   end)
 end
 
+-- Method to get an instance by ID
 function PlayerStatusThread.getInstanceById(identifier)
   return PlayerStatusThread.registry[identifier]
 end
