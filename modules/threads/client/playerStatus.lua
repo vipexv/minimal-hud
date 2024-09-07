@@ -20,7 +20,6 @@ function PlayerStatusThread.new(identifier)
 end
 
 function PlayerStatusThread:getIsVehicleThreadRunning()
-  debug("(PlayerStatusThread:getIsVehicleThreadRunning) identifier: ", self.identifier)
   debug("(PlayerStatusThread:getIsVehicleThreadRunning), Returning: ", self.isVehicleThreadRunning)
   return self.isVehicleThreadRunning
 end
@@ -66,9 +65,8 @@ function PlayerStatusThread:start(vehicleStatusThread)
       local pedHealth = math.floor(GetEntityHealth(ped) / GetEntityMaxHealth(ped) * 100)
       local isInVehicle = IsPedInAnyVehicle(ped, false)
 
-      -- Check if vehicle status thread should be started
       if isInVehicle and not self:getIsVehicleThreadRunning() and vehicleStatusThread then
-        vehicleStatusThread:start() -- Call the start method of vehicleStatusThread
+        vehicleStatusThread:start()
         debug("(playerStatus) (vehicleStatusThread) Vehicle status thread started.")
       end
 

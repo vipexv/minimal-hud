@@ -2,6 +2,13 @@ local utility = {}
 local config = require 'config.shared'
 local currentResourceName = GetCurrentResourceName()
 
+
+---@param value number
+---@return number
+utility.convertRpmToPercentage = function(value)
+    return math.ceil(value * 10000 - 2001) / 80
+end
+
 ---@param ... any
 utility.debug = function(...)
     if not config.debug then return end

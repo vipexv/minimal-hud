@@ -1,5 +1,6 @@
 local debug = require("modules.utils.shared").debug
 local interface = require("modules.interface.client")
+local utility = require("modules.utils.shared")
 
 local VehicleStatusThread = {}
 VehicleStatusThread.__index = VehicleStatusThread
@@ -15,11 +16,12 @@ function VehicleStatusThread:start()
     local ped = PlayerPedId()
 
     self.playerStatus:setIsVehicleThreadRunning(true)
+
     while IsPedInAnyVehicle(ped, false) do
       local vehicle = GetVehiclePedIsIn(ped, false)
       local engineHealth = tonumber(GetVehicleEngineHealth(vehicle) / 100 * 100)
       local speed = math.floor(GetEntitySpeed(vehicle) * 2.236936)
-      local rpm = math.floor(GetVehicleCurrentRpm(vehicle) / 100 * 100)
+      local rpm = utility.convertRpmToPercentage(GetVehicleCurrentRpm(vehicle))
       local fuelValue = Entity(vehicle).state.fuel or GetVehicleFuelLevel(vehicle)
       local fuel = math.floor(fuelValue * 10 + 0.5) / 10
 
@@ -30,7 +32,7 @@ function VehicleStatusThread:start()
         fuel = fuel,
       })
 
-      debug("(vehicleStatusThread) Vehicle status: ", speed, engineHealth, fuel)
+      debug("(vehicleStatusThread) Vehicle status: ", rpm)
       Wait(120)
     end
 
