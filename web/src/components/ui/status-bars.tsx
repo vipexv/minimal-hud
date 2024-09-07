@@ -1,22 +1,21 @@
 import { TiHeartFullOutline } from "react-icons/ti";
 import { useMemo } from "react";
 
-interface StatBarProps {
-    icon?: React.ReactNode;
+interface StatBarProps extends React.HTMLAttributes<HTMLDivElement> {
+    Icon?: React.ReactNode;
     value?: number;
     maxValue?: number;
     color?: string;
     vertical?: boolean;
-    props?: React.HTMLAttributes<HTMLDivElement>;
 }
 
 export const StatBar = ({
-    icon = <TiHeartFullOutline size={20} />,
+    Icon = <TiHeartFullOutline size={20} />,
     value = 20,
     maxValue = 100,
     color = "#94f024",
     vertical = false,
-    props,
+    ...props
 }: StatBarProps) => {
     const percentage = useMemo(
         () => (value / maxValue) * 100,
@@ -30,7 +29,7 @@ export const StatBar = ({
             } items-center gap-1`}
             {...props}
         >
-            <div className={`text-white/70`}>{icon}</div>
+            <div className={`text-white/70`}>{Icon}</div>
             {!vertical && (
                 <p
                     className="text-xs w-[20px] text-center font-bold"
@@ -60,18 +59,17 @@ export const StatBar = ({
     );
 };
 
-interface StatBarSegmentedProps {
-    icon?: React.ReactNode;
+interface StatBarSegmentedProps extends React.HTMLAttributes<HTMLDivElement> {
+    Icon?: React.ReactNode;
     value?: number;
     color?: string;
-    props?: React.HTMLAttributes<HTMLDivElement>;
 }
 
 export const StatBarSegmented = ({
-    icon = <TiHeartFullOutline size={20} />,
+    Icon = <TiHeartFullOutline size={20} />,
     value = 20,
     color = "#94f024",
-    props,
+    ...props
 }: StatBarSegmentedProps) => {
     const segments = 4;
     const segmentWidth = 100 / segments;
@@ -95,7 +93,7 @@ export const StatBarSegmented = ({
 
     return (
         <div className="flex items-center gap-1 w-full" {...props}>
-            <div className="text-white/70">{icon}</div>
+            <div className="text-white/70">{Icon}</div>
             <p
                 className="text-xs w-[20px] text-center font-bold"
                 style={{ color: color }}

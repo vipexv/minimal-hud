@@ -5,16 +5,16 @@ export const Compass = () => {
     return (
         <div className={"flex w-full h-[10dvh] items-center justify-center"}>
             <div className={"flex gap-3 items-center justify-center w-[50%]"}>
-                <IconLabelBox label="NW" icon={FaCompass} />
+                <IconLabelBox label="NW" Icon={FaCompass} />
                 <IconLabelBox
                     label="Vinewood Blvd"
                     className="w-[20%]"
-                    icon={FaLocationDot}
+                    Icon={FaLocationDot}
                 />
                 <IconLabelBox
                     textClassName=""
                     label="Downtown Vinewood"
-                    icon={FaMap}
+                    Icon={FaMap}
                 />
             </div>
         </div>

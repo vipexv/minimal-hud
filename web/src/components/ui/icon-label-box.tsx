@@ -1,25 +1,28 @@
 import React from "react";
 import type { IconType } from "react-icons";
-import { FaCompass } from "react-icons/fa6";
+import { FaCompass } from "react-icons/fa";
 import { twMerge } from "tailwind-merge";
 
-interface IconLabelBoxProps {
-    icon?: React.ComponentType<{ className?: string }>;
+interface IconProps {
+    className?: string;
+}
+
+interface IconLabelBoxProps extends React.HTMLAttributes<HTMLDivElement> {
+    Icon?: React.ComponentType<{ className?: string }>;
     label?: string;
     className?: string;
     textClassName?: string;
     iconClassName?: string;
-    props: React.HTMLAttributes<HTMLDivElement>;
 }
 
-const IconLabelBox = ({
-    icon: Icon = FaCompass,
+const IconLabelBox: React.FC<IconLabelBoxProps> = ({
+    Icon: Icon = FaCompass,
     label = "NW",
     className = "",
     textClassName = "",
     iconClassName = "",
-    props,
-}: IconLabelBoxProps) => {
+    ...props
+}) => {
     return (
         <div
             className={twMerge(
@@ -28,7 +31,7 @@ const IconLabelBox = ({
             )}
             {...props}
         >
-            <Icon className={twMerge("mr-2", iconClassName)} />{" "}
+            <Icon className={twMerge("mr-2", iconClassName)} />
             <p
                 className={twMerge(
                     `text-center text-white font-bold text-sm`,

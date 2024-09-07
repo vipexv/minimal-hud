@@ -1,16 +1,17 @@
 import { useMemo } from "preact/hooks";
 
+interface TextProgressBarProps extends React.HTMLAttributes<HTMLDivElement> {
+    value?: number;
+    label?: string;
+    color?: string;
+}
+
 export const TextProgressBar = ({
     value = 50,
     label = "FUEL",
     color = "#94f024",
-    props,
-}: {
-    value?: number;
-    label?: string;
-    color?: string;
-    props?: React.HTMLAttributes<HTMLDivElement>;
-}) => {
+    ...props
+}: TextProgressBarProps) => {
     const getColor = useMemo(() => {
         if (value <= 20) return "#f70101";
         if (value <= 50) return "#f7e300";
