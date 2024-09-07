@@ -1,6 +1,6 @@
+import { BiSolidShieldAlt2 } from "react-icons/bi";
 import { TiHeartFullOutline } from "react-icons/ti";
 import { StatBar, StatBarSegmented } from "./ui/status-bars";
-import { BiSolidShieldAlt2 } from "react-icons/bi";
 
 export const PlayerStatus = () => {
     return (

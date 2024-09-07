@@ -1,12 +1,11 @@
 import { useNuiEvent } from "@/hooks/useNuiEvent.ts";
 import { useEffect, useState } from "react";
 import { CarHud } from "./components/car-hud";
+import { Compass } from "./components/compass";
 import { PlayerStatus } from "./components/player-status";
-import { useExitListener } from "./hooks/useExitListener";
 import { debug, setDebugMode } from "./utils/debug";
 import { fetchNui } from "./utils/fetchNui";
 import { isEnvBrowser } from "./utils/misc";
-import { Compass } from "./components/compass";
 
 if (isEnvBrowser()) {
     const body = document.body;

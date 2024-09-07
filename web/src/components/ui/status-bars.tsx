@@ -1,5 +1,5 @@
-import { TiHeartFullOutline } from "react-icons/ti";
 import { useMemo } from "react";
+import { TiHeartFullOutline } from "react-icons/ti";
 
 interface StatBarProps extends React.HTMLAttributes<HTMLDivElement> {
     Icon?: React.ReactNode;

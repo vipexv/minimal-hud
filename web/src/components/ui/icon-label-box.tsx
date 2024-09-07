@@ -1,11 +1,6 @@
 import React from "react";
-import type { IconType } from "react-icons";
 import { FaCompass } from "react-icons/fa";
 import { twMerge } from "tailwind-merge";
-
-interface IconProps {
-    className?: string;
-}
 
 interface IconLabelBoxProps extends React.HTMLAttributes<HTMLDivElement> {
     Icon?: React.ComponentType<{ className?: string }>;
