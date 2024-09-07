@@ -6,36 +6,30 @@ local interface = require("modules.interface.client")
 local PlayerStatusThread = {}
 PlayerStatusThread.__index = PlayerStatusThread
 
--- Registry for storing instances
 PlayerStatusThread.registry = {}
 
--- Constructor to create a new instance
 function PlayerStatusThread.new(identifier)
   local self = setmetatable({}, PlayerStatusThread)
   self.identifier = identifier
   self.isVehicleThreadRunning = false
 
-  -- Register the instance
   PlayerStatusThread.registry[identifier] = self
 
   debug("(PlayerStatusThread:new) Created new instance with identifier: ", identifier)
   return self
 end
 
--- Getter for `isVehicleThreadRunning`
 function PlayerStatusThread:getIsVehicleThreadRunning()
   debug("(PlayerStatusThread:getIsVehicleThreadRunning) identifier: ", self.identifier)
   debug("(PlayerStatusThread:getIsVehicleThreadRunning), Returning: ", self.isVehicleThreadRunning)
   return self.isVehicleThreadRunning
 end
 
--- Setter for `isVehicleThreadRunning`
 function PlayerStatusThread:setIsVehicleThreadRunning(value)
   debug("(PlayerStatusThread:setIsVehicleThreadRunning) Setting: ", value)
   self.isVehicleThreadRunning = value
 end
 
--- Method to start the player status thread
 function PlayerStatusThread:start(vehicleStatusThread)
   Citizen.CreateThread(function()
     while true do
@@ -94,7 +88,6 @@ function PlayerStatusThread:start(vehicleStatusThread)
   end)
 end
 
--- Method to get an instance by ID
 function PlayerStatusThread.getInstanceById(identifier)
   return PlayerStatusThread.registry[identifier]
 end
