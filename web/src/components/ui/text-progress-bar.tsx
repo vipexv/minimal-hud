@@ -1,3 +1,5 @@
+import { useMemo } from "preact/hooks";
+
 export const TextProgressBar = ({
     value = 50,
     label = "FUEL",
@@ -7,11 +9,12 @@ export const TextProgressBar = ({
     label?: string;
     color?: string;
 }) => {
-    const getColor = () => {
+    // Memoize color calculation
+    const getColor = useMemo(() => {
         if (value <= 20) return "#f70101";
         if (value <= 50) return "#f7e300";
         return color;
-    };
+    }, [color, value]);
 
     return (
         <div
@@ -38,7 +41,7 @@ export const TextProgressBar = ({
                     }`}
                     style={{
                         width: `${value}%`,
-                        backgroundColor: getColor(),
+                        backgroundColor: getColor, // Use getColor directly
                     }}
                 ></div>
             </div>
