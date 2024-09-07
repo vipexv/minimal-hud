@@ -62,9 +62,10 @@ export default function Component(
     };
 
     return (
-        <div className="w-60 h-64 relative">
+        <div className="w-60 h-64 relative flex items-center justify-center -mb-20 z-0">
             <svg
                 viewBox="0 0 100 100"
+                preserveAspectRatio="none"
                 className="w-full h-full transform rotate-[240deg]"
             >
                 <defs>
@@ -102,8 +103,8 @@ export default function Component(
                         );
                     })}
                 </g>
-                {[...Array(7)].map((_, i) => {
-                    const angle = (i * arcLength) / 6;
+                {[...Array(8)].map((_, i) => {
+                    const angle = (i * arcLength) / 7;
                     return (
                         <g key={`gear-${i}`}>
                             <path
@@ -116,7 +117,7 @@ export default function Component(
                     );
                 })}
             </svg>
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="absolute inset-0 flex items-center justify-center -skew-x-[10deg]">
                 <div className="text-center flex flex-col">
                     <span className="text-4xl font-bold text-white tabular-nums">
                         {speed}
