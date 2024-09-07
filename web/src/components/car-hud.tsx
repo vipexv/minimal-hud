@@ -5,7 +5,7 @@ export const CarHud = () => {
     return (
         <div
             className={
-                "absolute bottom-1 border right-1 w-[20dvw] h-[30dvh] flex-col items-center flex justify-center gap-[18px]"
+                "absolute bottom-1 right-1 w-[20dvw] h-[30dvh] flex-col items-center flex justify-center gap-[18px]"
             }
         >
             <Speedometer speed={50} maxSpeed={100} />

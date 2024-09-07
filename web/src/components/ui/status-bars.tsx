@@ -30,7 +30,7 @@ export const StatBar = ({
             <div className={`text-white/70`}>{icon}</div>
             {!vertical && (
                 <p
-                    className="text-xs w-[20px] text-center font-medium"
+                    className="text-xs w-[20px] text-center font-bold"
                     style={{
                         color: color,
                     }}
@@ -92,17 +92,18 @@ export const StatBarSegmented = ({
         <div className="flex items-center gap-1 w-full">
             <div className="text-white/70">{icon}</div>
             <p
-                className="text-xs w-[20px] text-center font-medium"
+                className="text-xs w-[20px] text-center font-bold"
                 style={{ color: color }}
             >
                 {value}
             </p>
-            <div className="relative flex gap-1 w-full ml-1 h-[8px] rounded-[1px]">
+            <div className="relative flex gap-3 w-full ml-1 h-[8px] rounded-[1px]">
                 {segmentFills.map((fill, index) => (
                     <svg
                         key={index}
                         width="100%"
                         height="100%"
+                        className={"rounded-full"}
                         viewBox="0 0 100 24"
                         preserveAspectRatio="none"
                     >
