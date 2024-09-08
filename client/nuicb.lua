@@ -1,6 +1,7 @@
 local interface = require("modules.interface.client")
 local debug = require("modules.utils.shared").debug
 local config = require("config.shared")
+local utility = require("modules.utils.shared")
 
 RegisterNuiCallback("hideFrame", function(_, cb)
     cb(true)
@@ -10,6 +11,11 @@ end)
 
 -- Called once when the app is loaded in the browser, you can return any necessary data here.
 RegisterNuiCallback('uiLoaded', function(_, cb)
-    cb(config)
+    local data = {
+        config = config,
+        minimap = utility.calculateMinimapSizeAndPosition(),
+    }
+
+    cb(data)
     debug("(nuicb:uiLoaded) Updating config.")
 end)

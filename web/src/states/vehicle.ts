@@ -19,5 +19,5 @@ const mockVehicleState: VehicleStateInterface = {
 const vehicleState = atom<VehicleStateInterface>(mockVehicleState);
 
 export const useVehicleState = () => useAtomValue(vehicleState);
-export const setVehicleState = () => useSetAtom(vehicleState);
+export const useSetVehicleState = () => useSetAtom(vehicleState);
 export const useVehicleStateStore = () => useAtom(vehicleState);

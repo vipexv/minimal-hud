@@ -43,7 +43,7 @@ export const StatBar = ({
             <div
                 className={`relative ${
                     vertical ? "h-full w-2" : "w-full ml-1 h-2"
-                } bg-black/20  rounded-[1px] overflow-hidden`}
+                } bg-black/30  rounded-[1px] overflow-hidden`}
             >
                 <div
                     className={`absolute ${
@@ -115,7 +115,7 @@ export const StatBarSegmented = ({
                             y="0"
                             width="100"
                             height="24"
-                            className={"fill-black/20"}
+                            className={"fill-black/30"}
                         />
                         <rect
                             x="0"

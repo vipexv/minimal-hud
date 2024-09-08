@@ -21,5 +21,5 @@ const mockPlayerState: PlayerStateInterface = {
 const playerState = atom<PlayerStateInterface>(mockPlayerState);
 
 export const usePlayerState = () => useAtomValue(playerState);
-export const setPlayerState = () => useSetAtom(playerState);
+export const useSetPlayerState = () => useSetAtom(playerState);
 export const usePlayerStateStore = () => useAtom(playerState);

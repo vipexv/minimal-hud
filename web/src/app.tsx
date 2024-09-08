@@ -3,6 +3,11 @@ import { useEffect, useState } from "react";
 import { CarHud } from "./components/car-hud";
 import { Compass } from "./components/compass";
 import { PlayerStatus } from "./components/player-status";
+import {
+    useSetMinimapState,
+    type MinimapStateInterface,
+} from "./states/minimap";
+import type { ConfigInterface } from "./tyes/config";
 import { debug, setDebugMode } from "./utils/debug";
 import { fetchNui } from "./utils/fetchNui";
 import { isEnvBrowser } from "./utils/misc";
@@ -16,6 +21,7 @@ if (isEnvBrowser()) {
 
 export function App() {
     const [visible, setVisible] = useState(true);
+    const setMinimapState = useSetMinimapState();
 
     useNuiEvent("setVisible", (state) => {
         const newState = state === "toggle" ? !visible : state;
@@ -29,9 +35,15 @@ export function App() {
 
     useEffect(() => {
         fetchNui("uiLoaded")
-            .then((res) => {
-                setDebugMode(res.debug ?? false);
-            })
+            .then(
+                (res: {
+                    config: ConfigInterface;
+                    minimap: MinimapStateInterface;
+                }) => {
+                    setDebugMode(res.config.debug ?? false);
+                    setMinimapState(res.minimap);
+                }
+            )
             .catch((err) => {
                 console.error(err);
             })
