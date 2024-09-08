@@ -37,8 +37,6 @@ const CarHud = () => {
         return null;
     }
 
-    debug("(CarHud) Rendering...");
-
     return (
         <div
             className={
