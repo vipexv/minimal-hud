@@ -8,10 +8,10 @@ export interface MinimapStateInterface {
 }
 
 const mockMinimapState: MinimapStateInterface = {
-    width: 100,
-    height: 100,
-    left: 0,
-    top: 0,
+    height: 197.64,
+    left: 1.0000020265579224,
+    top: 75.99999797344208,
+    width: 314.496,
 };
 
 const minimapState = atom<MinimapStateInterface>(mockMinimapState);
