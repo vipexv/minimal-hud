@@ -7,7 +7,6 @@ import React from "preact/compat";
 const Compass = () => {
     const playerState = usePlayerState();
 
-    debug("(Compass) Rendering...");
     return (
         <div className={"flex w-full h-[10dvh] items-center justify-center"}>
             <div className={"flex gap-3 items-center justify-center w-[50%]"}>
