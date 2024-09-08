@@ -1,7 +1,8 @@
 {
-    "name": "preact-resource-template",
+    "name": "minimal-hud",
+    "author": "vipex",
     "private": true,
-    "version": "0.0.0",
+    "version": "1.0.0",
     "type": "module",
     "scripts": {
         "dev": "vite",

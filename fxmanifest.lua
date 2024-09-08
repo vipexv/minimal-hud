@@ -2,8 +2,9 @@
 fx_version "cerulean"
 game "gta5"
 
-author "vipex"
+author "vipex <discord:vipex.v>"
 version "1.0.0"
+repository 'https://github.com/vipexv/minimal-hud'
 
 shared_scripts {
     "require.lua",
