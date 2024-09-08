@@ -6,7 +6,7 @@ import Speedometer from "./ui/speedometer";
 import { TextProgressBar } from "./ui/text-progress-bar";
 import { useNuiEvent } from "@/hooks/useNuiEvent";
 import { usePlayerState } from "@/states/player";
-import { debug } from "console";
+import { debug } from "@/utils/debug";
 
 export const CarHud = () => {
     const [vehicleState, setVehicleState] = useVehicleStateStore();
