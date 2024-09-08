@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import {
     useVehicleStateStore,
     type VehicleStateInterface,
@@ -9,7 +9,7 @@ import { useNuiEvent } from "@/hooks/useNuiEvent";
 import { usePlayerState } from "@/states/player";
 import { debug } from "@/utils/debug";
 
-const CarHud = () => {
+const CarHud = React.memo(function CarHud() {
     const [vehicleState, setVehicleState] = useVehicleStateStore();
     const playerState = usePlayerState();
 
@@ -30,32 +30,36 @@ const CarHud = () => {
         handleVehicleStateUpdate
     );
 
-    if (!playerState.isInVehicle) {
-        debug(
-            "(CarHud) Returning with no children since the player is not in a vehicle."
-        );
-        return null;
-    }
+    const content = useMemo(() => {
+        if (!playerState.isInVehicle) {
+            debug(
+                "(CarHud) Returning with no children since the player is not in a vehicle."
+            );
+            return null;
+        }
 
-    return (
-        <div
-            className={
-                "absolute bottom-1 right-1 w-[20dvw] h-[30dvh] flex-col items-center flex justify-center gap-2"
-            }
-        >
-            <Speedometer
-                rpm={vehicleState.rpm}
-                speed={vehicleState.speed}
-                gears={vehicleState.gears}
-                maxRpm={100}
-            />
-            <div className={"flex gap-2 items-center mr-2"}>
-                <TextProgressBar label="FUEL" value={vehicleState.fuel} />
-                <TextProgressBar label="ENG" value={vehicleState.engine} />
-                <TextProgressBar label="BELT" value={100} />
+        return (
+            <div
+                className={
+                    "absolute bottom-1 right-1 w-[20dvw] h-[30dvh] flex-col items-center flex justify-center gap-2"
+                }
+            >
+                <Speedometer
+                    rpm={vehicleState.rpm}
+                    speed={vehicleState.speed}
+                    gears={vehicleState.gears}
+                    maxRpm={100}
+                />
+                <div className={"flex gap-2 items-center mr-2"}>
+                    <TextProgressBar label="FUEL" value={vehicleState.fuel} />
+                    <TextProgressBar label="ENG" value={vehicleState.engine} />
+                    <TextProgressBar label="BELT" value={100} />
+                </div>
             </div>
-        </div>
-    );
-};
+        );
+    }, [playerState.isInVehicle, vehicleState]);
 
-export default React.memo(CarHud);
+    return content;
+});
+
+export default CarHud;
