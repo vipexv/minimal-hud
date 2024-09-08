@@ -1,8 +1,5 @@
 import { useNuiEvent } from "@/hooks/useNuiEvent.ts";
 import { useEffect, useState } from "react";
-import { CarHud } from "./components/car-hud";
-import { Compass } from "./components/compass";
-import { PlayerStatus } from "./components/player-status";
 import {
     useSetMinimapState,
     type MinimapStateInterface,
@@ -11,6 +8,9 @@ import type { ConfigInterface } from "./tyes/config";
 import { debug, setDebugMode } from "./utils/debug";
 import { fetchNui } from "./utils/fetchNui";
 import { isEnvBrowser } from "./utils/misc";
+import CarHud from "./components/car-hud";
+import PlayerStatus from "./components/player-status";
+import Compass from "./components/compass";
 
 if (isEnvBrowser()) {
     const body = document.body;
@@ -56,6 +56,8 @@ export function App() {
         debug("(App) Returning with no children since the app is not visible.");
         return <></>;
     }
+
+    debug("(App) Rendering...");
 
     return (
         <>

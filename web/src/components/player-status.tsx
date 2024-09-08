@@ -4,12 +4,29 @@ import { StatBar, StatBarSegmented } from "./ui/status-bars";
 import { PlayerStateInterface, usePlayerStateStore } from "@/states/player";
 import { useNuiEvent } from "@/hooks/useNuiEvent";
 import { useMinimapState } from "@/states/minimap";
+import { debug } from "@/utils/debug";
+import React, { useCallback } from "preact/compat";
 
-export const PlayerStatus = () => {
+const PlayerStatus = () => {
     const [playerState, setPlayerState] = usePlayerStateStore();
     const minimap = useMinimapState();
 
-    useNuiEvent<PlayerStateInterface>("setPlayerState", setPlayerState);
+    const handlePlayerStateUpdate = useCallback(
+        (newState: PlayerStateInterface) => {
+            setPlayerState((prevState) => {
+                if (JSON.stringify(prevState) !== JSON.stringify(newState)) {
+                    return newState;
+                }
+                return prevState;
+            });
+        },
+        [setPlayerState]
+    );
+
+    useNuiEvent<PlayerStateInterface>(
+        "setPlayerState",
+        handlePlayerStateUpdate
+    );
 
     return (
         <div
@@ -40,3 +57,5 @@ export const PlayerStatus = () => {
         </div>
     );
 };
+
+export default React.memo(PlayerStatus);

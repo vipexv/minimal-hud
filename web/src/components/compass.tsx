@@ -1,10 +1,13 @@
 import { FaCompass, FaLocationDot, FaMap } from "react-icons/fa6";
 import IconLabelBox from "./ui/icon-label-box";
 import { usePlayerState } from "@/states/player";
+import { debug } from "@/utils/debug";
+import React from "preact/compat";
 
-export const Compass = () => {
+const Compass = () => {
     const playerState = usePlayerState();
 
+    debug("(Compass) Rendering...");
     return (
         <div className={"flex w-full h-[10dvh] items-center justify-center"}>
             <div className={"flex gap-3 items-center justify-center w-[50%]"}>
@@ -19,3 +22,5 @@ export const Compass = () => {
         </div>
     );
 };
+
+export default React.memo(Compass);

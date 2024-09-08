@@ -1,3 +1,4 @@
+import React, { useCallback } from "react";
 import {
     useVehicleStateStore,
     type VehicleStateInterface,
@@ -8,18 +9,35 @@ import { useNuiEvent } from "@/hooks/useNuiEvent";
 import { usePlayerState } from "@/states/player";
 import { debug } from "@/utils/debug";
 
-export const CarHud = () => {
+const CarHud = () => {
     const [vehicleState, setVehicleState] = useVehicleStateStore();
     const playerState = usePlayerState();
 
-    useNuiEvent<VehicleStateInterface>("setVehicleState", setVehicleState);
+    const handleVehicleStateUpdate = useCallback(
+        (newState: VehicleStateInterface) => {
+            setVehicleState((prevState) => {
+                if (JSON.stringify(prevState) !== JSON.stringify(newState)) {
+                    return newState;
+                }
+                return prevState;
+            });
+        },
+        [setVehicleState]
+    );
+
+    useNuiEvent<VehicleStateInterface>(
+        "setVehicleState",
+        handleVehicleStateUpdate
+    );
 
     if (!playerState.isInVehicle) {
         debug(
             "(CarHud) Returning with no children since the player is not in a vehicle."
         );
-        return <></>;
+        return null;
     }
+
+    debug("(CarHud) Rendering...");
 
     return (
         <div
@@ -41,3 +59,5 @@ export const CarHud = () => {
         </div>
     );
 };
+
+export default React.memo(CarHud);
