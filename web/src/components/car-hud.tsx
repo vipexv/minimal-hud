@@ -5,11 +5,21 @@ import {
 import Speedometer from "./ui/speedometer";
 import { TextProgressBar } from "./ui/text-progress-bar";
 import { useNuiEvent } from "@/hooks/useNuiEvent";
+import { usePlayerState } from "@/states/player";
+import { debug } from "console";
 
 export const CarHud = () => {
     const [vehicleState, setVehicleState] = useVehicleStateStore();
+    const playerState = usePlayerState();
 
     useNuiEvent<VehicleStateInterface>("setVehicleState", setVehicleState);
+
+    if (!playerState.isInVehicle) {
+        debug(
+            "(CarHud) Returning with no children since the player is not in a vehicle."
+        );
+        return <></>;
+    }
 
     return (
         <div
