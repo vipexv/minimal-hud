@@ -5,8 +5,10 @@ local currentResourceName = GetCurrentResourceName()
 ---@param value number
 ---@return number
 utility.convertRpmToPercentage = function(value)
-    return math.ceil(value * 10000 - 2001) / 80
+    local percentage = math.ceil(value * 10000 - 2001) / 80
+    return math.max(0, math.min(percentage, 100))
 end
+
 
 ---@return {width: number, height: number, left: number, top: number}
 utility.calculateMinimapSizeAndPosition = function()
