@@ -20,14 +20,14 @@ server_scripts {
     "server/main.lua",
 }
 
-ui_page 'dist/web/index.html'
+ui_page 'dist/index.html'
 -- ui_page 'http://localhost:5173/'
 
 files {
-    'dist/web/index.html',
-    'dist/web/assets/*.js',
-    'dist/web/assets/*.css',
-    'dist/web/**/*.woff2',
+    'dist/index.html',
+    'dist/assets/*.js',
+    'dist/assets/*.css',
+    'dist/**/*.woff2',
     "config/shared.lua",
     "config/functions.lua",
     "modules/interface/client.lua",
