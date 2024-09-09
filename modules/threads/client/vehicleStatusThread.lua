@@ -1,5 +1,6 @@
 local interface = require("modules.interface.client")
 local utility = require("modules.utils.shared")
+local functions = require("config.functions")
 local debug = utility.debug
 
 local VehicleStatusThread = {}
@@ -24,8 +25,8 @@ function VehicleStatusThread:start()
       local engineHealth = convertEngineHealthToPercentage(GetVehicleEngineHealth(vehicle))
       local speed = math.floor(GetEntitySpeed(vehicle) * 2.236936)
       local rpm = convertRpmToPercentage(GetVehicleCurrentRpm(vehicle))
-      local fuelValue = Entity(vehicle).state.fuel or GetVehicleFuelLevel(vehicle)
-      local fuel = math.floor(fuelValue * 10 + 0.5) / 10
+      local fuelValue = math.max(0, math.min(functions.getVehicleFuel(vehicle), 100))
+      local fuel = math.floor(fuelValue)
       local gears = GetVehicleHighGear(vehicle)
 
       interface.message("setVehicleState", {
