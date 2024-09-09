@@ -9,5 +9,3 @@ local vehicleStatusThread = vehicleStatusClass.new(playerStatusThread)
 local seatbeltLogic = seatbeltLogicClass.new()
 
 playerStatusThread:start(vehicleStatusThread, seatbeltLogic)
-
-CreateThread(utils.setupMinimap)

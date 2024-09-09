@@ -94,13 +94,6 @@ utility.setupMinimap = function()
     SetMinimapComponentPosition('minimap_blur', 'L', 'B', -0.01 + minimapOffset, 0.025, 0.262, 0.300)
 
     SetBlipAlpha(GetNorthRadarBlip(), 0)
-
-    SetBigmapActive(true, false)
-
-    SetMinimapClipType(0)
-
-    Wait(50)
-    SetBigmapActive(false, false)
 end
 
 ---@param coords vector3
