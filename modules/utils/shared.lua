@@ -9,6 +9,13 @@ utility.convertRpmToPercentage = function(value)
     return math.max(0, math.min(percentage, 100))
 end
 
+utility.convertEngineHealthToPercentage = function(value)
+    local percentage = ((value + 4000) / 5000) * 100
+
+    percentage = math.max(0, math.min(percentage, 100))
+
+    return percentage
+end
 
 ---@return {width: number, height: number, left: number, top: number}
 utility.calculateMinimapSizeAndPosition = function()

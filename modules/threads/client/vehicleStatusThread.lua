@@ -16,12 +16,12 @@ function VehicleStatusThread:start()
     local ped = PlayerPedId()
     local playerStatusThread = self.playerStatus
     local convertRpmToPercentage = utility.convertRpmToPercentage
-
+    local convertEngineHealthToPercentage = utility.convertEngineHealthToPercentage
     self.playerStatus:setIsVehicleThreadRunning(true)
 
     while IsPedInAnyVehicle(ped, false) do
       local vehicle = GetVehiclePedIsIn(ped, false)
-      local engineHealth = tonumber(GetVehicleEngineHealth(vehicle) / 100 * 100)
+      local engineHealth = convertEngineHealthToPercentage(GetVehicleEngineHealth(vehicle))
       local speed = math.floor(GetEntitySpeed(vehicle) * 2.236936)
       local rpm = convertRpmToPercentage(GetVehicleCurrentRpm(vehicle))
       local fuelValue = Entity(vehicle).state.fuel or GetVehicleFuelLevel(vehicle)
