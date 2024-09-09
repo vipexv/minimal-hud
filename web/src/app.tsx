@@ -57,8 +57,6 @@ export function App() {
         return <></>;
     }
 
-    debug("(App) Rendering...");
-
     return (
         <>
             <PlayerStatus />

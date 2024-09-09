@@ -4,7 +4,6 @@ local debug = require("modules.utils.shared").debug
 local SeatbeltLogic = {}
 SeatbeltLogic.__index = SeatbeltLogic
 
--- Constructor to create a new instance of SeatbeltLogic
 function SeatbeltLogic.new()
   if not config.useBuiltInSeatbeltLogic then
     debug("(SeatbeltLogic.new) Config.useBuiltInSeatbeltLogic is disabled.")
@@ -51,13 +50,13 @@ function SeatbeltLogic:toggle(state)
 end
 
 function SeatbeltLogic:disableVehicleExitControlThread()
-  debug("(SeatbeltLogic:disableVehicleExitControlThread) Vehicle exit control thread enabled.")
+  debug("(SeatbeltLogic:disableVehicleExitControlThread) Thread enabled.")
   Citizen.CreateThread(function()
     while self.isSeatbeltOn do
-      DisableControlAction(0, 75, true) -- Disable exit vehicle
+      DisableControlAction(0, 75, true) -- 75: INPUT_VEH_EXIT
       Wait(0)
     end
-    debug("(SeatbeltLogic:disableVehicleExitControlThread) Vehicle exit control thread disabled.")
+    debug("(SeatbeltLogic:disableVehicleExitControlThread) Thread disabled.")
   end)
 end
 

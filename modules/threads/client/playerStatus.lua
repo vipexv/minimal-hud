@@ -10,6 +10,8 @@ PlayerStatusThread.__index = PlayerStatusThread
 
 PlayerStatusThread.registry = {}
 
+---@param identifier string
+---@return table
 function PlayerStatusThread.new(identifier)
   local self = setmetatable({}, PlayerStatusThread)
   self.identifier = identifier
@@ -25,6 +27,7 @@ function PlayerStatusThread:getIsVehicleThreadRunning()
   return self.isVehicleThreadRunning
 end
 
+---@param value boolean
 function PlayerStatusThread:setIsVehicleThreadRunning(value)
   debug("(PlayerStatusThread:setIsVehicleThreadRunning) Setting: ", value)
   self.isVehicleThreadRunning = value
@@ -66,7 +69,7 @@ function PlayerStatusThread:start(vehicleStatusThread, seatbeltLogic)
       local pedHealth = math.floor(GetEntityHealth(ped) / GetEntityMaxHealth(ped) * 100)
       local isInVehicle = IsPedInAnyVehicle(ped, false)
       local isSeatbeltOn = config.useBuiltInSeatbeltLogic and seatbeltLogic.isSeatbeltOn or
-      sharedFunctions.customSeatbeltLogic()
+          sharedFunctions.customSeatbeltLogic()
 
       if isInVehicle and not self:getIsVehicleThreadRunning() and vehicleStatusThread then
         vehicleStatusThread:start()
@@ -90,6 +93,7 @@ function PlayerStatusThread:start(vehicleStatusThread, seatbeltLogic)
   end)
 end
 
+---@param identifier string
 function PlayerStatusThread.getInstanceById(identifier)
   return PlayerStatusThread.registry[identifier]
 end
