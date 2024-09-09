@@ -20,8 +20,8 @@ server_scripts {
     "server/main.lua",
 }
 
--- ui_page 'dist/web/index.html'
-ui_page 'http://localhost:5173/'
+ui_page 'dist/web/index.html'
+-- ui_page 'http://localhost:5173/'
 
 files {
     'dist/web/index.html',
