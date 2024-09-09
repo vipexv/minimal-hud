@@ -10,6 +10,12 @@ function VehicleStatusThread.new(playerStatus, seatbeltLogic)
   local self = setmetatable({}, VehicleStatusThread)
   self.playerStatus = playerStatus
   self.seatbeltLogic = seatbeltLogic
+
+  SetHudComponentPosition(6, 999999.0, 999999.0) -- VEHICLE NAME
+  SetHudComponentPosition(7, 999999.0, 999999.0) -- AREA NAME
+  SetHudComponentPosition(8, 999999.0, 999999.0) -- VEHICLE CLASS
+  SetHudComponentPosition(9, 999999.0, 999999.0) -- STREET  NAME
+
   return self
 end
 
