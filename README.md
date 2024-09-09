@@ -17,7 +17,6 @@
 </p>
 
 <p align="center">
-  <a href="#key-features">Key Features</a> •
   <a href="#how-to-use">How To Use</a> •
   <a href="#download">Download</a> •
   <a href="#credits">Credits</a> •
@@ -28,14 +27,6 @@
 <p align="center">
  <img src="https://github.com/user-attachments/assets/dc180d43-97f6-46f2-a61f-58d9104a34f5">
 </p>
-
-
-## Key Features
-
-* Standalone
-  - No other dependencies needed.
-* Built in seatbelt logic (Optional)
-* Based off the Prodigy RP 2.0 HUD
 
 ## How To Use
 
