@@ -61,12 +61,12 @@ jobs:
             - name: Bundle files
               run: |
                   ls
-                  mkdir -p ./temp/vReports
-                  mkdir -p ./temp/vReports/web/
-                  cp ./{LICENSE,README.md,fxmanifest.lua,config.lua,sv_config.lua} ./temp/vReports
-                  cp -r ./{client,locales,server,shared} ./temp/vReports
-                  cp -r ./web/dist ./temp/vReports/web/
-                  cd ./temp && zip -r ../vReports.zip ./vReports
+                  mkdir -p ./temp/minimal-hud
+                  mkdir -p ./temp/minimal-hud/web/
+                  cp ./{LICENSE,README.md,fxmanifest.lua,require.lua} ./temp/minimal-hud
+                  cp -r ./{client,config,data,modules,server,stream} ./temp/minimal-hud
+                  cp -r ./dist ./temp/minimal-hud/
+                  cd ./temp && zip -r ../minimal-hud.zip ./minimal-hud
 
             - name: Create Release
               uses: "marvinpinto/action-automatic-releases@v1.2.1"
@@ -75,7 +75,7 @@ jobs:
                   repo_token: "${{ secrets.GITHUB_TOKEN }}"
                   title: ${{ env.RELEASE_VERSION }}
                   prerelease: false
-                  files: vReports.zip
+                  files: minimal-hud.zip
 
               env:
                   CI: false
