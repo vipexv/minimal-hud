@@ -21,7 +21,6 @@
   <a href="#download">Download</a> •
   <a href="#credits">Credits</a> •
   <a href="#support">Support</a> •
-  <a href="#license">License</a>
 </p>
 
 <p align="center">
