@@ -1,31 +1,9 @@
 local serverUtils = {}
 
-serverUtils.getPlayerIdentifiersWithoutIP = function(player)
-    local identifiers = GetPlayerIdentifiers(player)
-    local cleanedIdentifiers = {}
-    for _, identifier in ipairs(identifiers) do
-        if not string.find(identifier, "ip:") then
-            table.insert(cleanedIdentifiers, identifier)
-        end
-    end
-    return cleanedIdentifiers
-end
-
-serverUtils.getDiscordID = function(source)
-    local returnValue = nil
-    for idIndex = 1, GetNumPlayerIdentifiers(source) do
-        if GetPlayerIdentifier(source, idIndex) ~= nil and GetPlayerIdentifier(source, idIndex):sub(1, #("discord:")) == "discord:" then
-            returnValue = GetPlayerIdentifier(source, idIndex):gsub("discord:", "")
-        end
-    end
-    return returnValue
-end
-
--- Copy and pasta from "https://github.com/overextended/ox_lib"
 serverUtils.versionCheck = function(repository)
     local resource = GetInvokingResource() or GetCurrentResourceName()
 
-    local currentVersion = 'v1.1.1'
+    local currentVersion = 'v1.0.0'
 
     if currentVersion then
         currentVersion = currentVersion:match('%d+%.%d+%.%d+')
@@ -66,7 +44,7 @@ serverUtils.versionCheck = function(repository)
     end)
 end
 
-serverUtils.checkIfNuiHasLoaded = function()
+serverUtils.isInterfaceCompiled = function()
     local fileCheck = LoadResourceFile(GetCurrentResourceName(), 'dist/index.html')
     return fileCheck and true or false
 end
