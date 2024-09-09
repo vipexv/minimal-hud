@@ -6,9 +6,10 @@ local debug = utility.debug
 local VehicleStatusThread = {}
 VehicleStatusThread.__index = VehicleStatusThread
 
-function VehicleStatusThread.new(playerStatus)
+function VehicleStatusThread.new(playerStatus, seatbeltLogic)
   local self = setmetatable({}, VehicleStatusThread)
   self.playerStatus = playerStatus
+  self.seatbeltLogic = seatbeltLogic
   return self
 end
 
@@ -16,9 +17,11 @@ function VehicleStatusThread:start()
   CreateThread(function()
     local ped = PlayerPedId()
     local playerStatusThread = self.playerStatus
+    local seatbelt = self.seatbeltLogic
     local convertRpmToPercentage = utility.convertRpmToPercentage
     local convertEngineHealthToPercentage = utility.convertEngineHealthToPercentage
-    self.playerStatus:setIsVehicleThreadRunning(true)
+
+    playerStatusThread:setIsVehicleThreadRunning(true)
 
     while IsPedInAnyVehicle(ped, false) do
       local vehicle = GetVehiclePedIsIn(ped, false)
@@ -40,6 +43,7 @@ function VehicleStatusThread:start()
       Wait(120)
     end
 
+    seatbelt:toggle(false)
     playerStatusThread:setIsVehicleThreadRunning(false)
     debug("(vehicleStatusThread) Vehicle status thread ended.")
   end)
