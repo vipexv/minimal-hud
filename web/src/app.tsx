@@ -4,7 +4,7 @@ import {
     useSetMinimapState,
     type MinimapStateInterface,
 } from "./states/minimap";
-import type { ConfigInterface } from "./tyes/config";
+import type { ConfigInterface } from "./types/config";
 import { debug, setDebugMode } from "./utils/debug";
 import { fetchNui } from "./utils/fetchNui";
 import { isEnvBrowser } from "./utils/misc";

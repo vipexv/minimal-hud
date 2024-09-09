@@ -29,8 +29,10 @@ files {
     'dist/web/assets/*.css',
     'dist/web/**/*.woff2',
     "config/shared.lua",
+    "config/functions.lua",
     "modules/interface/client.lua",
     "modules/utils/shared.lua",
+    "modules/seatbelt/client.lua",
     "modules/threads/client/**/*.lua",
     "data/mapData.lua",
 }

@@ -2,6 +2,8 @@
 local mapData = require('data.mapData')
 local debug = require("modules.utils.shared").debug
 local interface = require("modules.interface.client")
+local config = require("config.shared")
+local sharedFunctions = require("config.functions")
 
 local PlayerStatusThread = {}
 PlayerStatusThread.__index = PlayerStatusThread
@@ -28,7 +30,7 @@ function PlayerStatusThread:setIsVehicleThreadRunning(value)
   self.isVehicleThreadRunning = value
 end
 
-function PlayerStatusThread:start(vehicleStatusThread)
+function PlayerStatusThread:start(vehicleStatusThread, seatbeltLogic)
   CreateThread(function()
     while true do
       local ped = PlayerPedId()
@@ -63,6 +65,8 @@ function PlayerStatusThread:start(vehicleStatusThread)
       local pedArmor = GetPedArmour(ped)
       local pedHealth = math.floor(GetEntityHealth(ped) / GetEntityMaxHealth(ped) * 100)
       local isInVehicle = IsPedInAnyVehicle(ped, false)
+      local isSeatbeltOn = config.useBuiltInSeatbeltLogic and seatbeltLogic.isSeatbeltOn or
+      sharedFunctions.customSeatbeltLogic()
 
       if isInVehicle and not self:getIsVehicleThreadRunning() and vehicleStatusThread then
         vehicleStatusThread:start()
@@ -75,6 +79,7 @@ function PlayerStatusThread:start(vehicleStatusThread)
         streetLabel = currentStreet,
         areaLabel = zone,
         heading = compass,
+        isSeatbeltOn = isSeatbeltOn,
         isInVehicle = isInVehicle,
       }
 

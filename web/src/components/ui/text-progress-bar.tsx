@@ -44,7 +44,7 @@ export const TextProgressBar = ({
                     }`}
                     style={{
                         width: `${value}%`,
-                        backgroundColor: getColor, // Use getColor directly
+                        backgroundColor: getColor,
                     }}
                 ></div>
             </div>

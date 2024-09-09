@@ -6,6 +6,7 @@ export interface PlayerStateInterface {
     streetLabel: string;
     areaLabel: string;
     heading: string;
+    isSeatbeltOn: boolean;
     isInVehicle: boolean;
 }
 
@@ -15,6 +16,7 @@ const mockPlayerState: PlayerStateInterface = {
     streetLabel: "Downtown Vinewood",
     areaLabel: "Vinewood Blvd",
     heading: "NW",
+    isSeatbeltOn: false,
     isInVehicle: false,
 };
 
