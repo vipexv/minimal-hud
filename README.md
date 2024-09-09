@@ -60,7 +60,7 @@ This software uses the following open source packages:
 - [Node.js](https://nodejs.org/)
 - [Preact](https://preactjs.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
-- Icons are from [here](https://react-icons.github.io/react-icons/)
+- [react-icons](https://react-icons.github.io/react-icons/)
 - [Jotai](https://jotai.org/)
 
 ## Support
