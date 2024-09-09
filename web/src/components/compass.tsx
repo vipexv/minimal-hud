@@ -13,7 +13,7 @@ const Compass = () => {
                 <IconLabelBox label={playerState.heading} Icon={FaCompass} />
                 <IconLabelBox
                     label={playerState.streetLabel}
-                    className="w-[20%]"
+                    className="min-w-[20%]"
                     Icon={FaLocationDot}
                 />
                 <IconLabelBox label={playerState.areaLabel} Icon={FaMap} />
