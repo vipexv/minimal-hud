@@ -11,9 +11,9 @@
     <img src="https://img.shields.io/github/downloads/vipexv/minimal-hud/total?logo=github"
          alt="Repo Downloads">
   </a>
-  <a><img src="https://img.shields.io/github/downloads/vipexv/minimal-hud/latest/total?logo=github"></a>
   <a> <img src="https://img.shields.io/github/contributors/vipexv/minimal-hud?logo=github"></a>
   <a> <img src="https://img.shields.io/github/v/release/vipexv/minimal-hud?logo=github"></a>
+  <a><img src="https://img.shields.io/github/downloads/vipexv/minimal-hud/latest/total?logo=github"></a>
 </p>
 
 <p align="center">
