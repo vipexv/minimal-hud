@@ -62,6 +62,7 @@ This software uses the following open source packages:
 - [Tailwind CSS](https://tailwindcss.com/)
 - [react-icons](https://react-icons.github.io/react-icons/)
 - [Jotai](https://jotai.org/)
+- [Vite](https://vitejs.dev/)
 
 ## Support
 
