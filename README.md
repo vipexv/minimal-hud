@@ -49,7 +49,7 @@ $ bun run dev
 
 ## Download
 
-You can [download](https://github.com/vipexv/minimal-hud/releases/latest) the latest installable version of Markdownify for Windows, macOS and Linux.
+You can [download](https://github.com/vipexv/minimal-hud/releases/latest) the latest installable version thats compiled.
 
 ## Credits
 
