@@ -1,8 +1,7 @@
+import { usePlayerState } from "@/states/player";
+import React from "preact/compat";
 import { FaCompass, FaLocationDot, FaMap } from "react-icons/fa6";
 import IconLabelBox from "./ui/icon-label-box";
-import { usePlayerState } from "@/states/player";
-import { debug } from "@/utils/debug";
-import React from "preact/compat";
 
 const Compass = () => {
     const playerState = usePlayerState();

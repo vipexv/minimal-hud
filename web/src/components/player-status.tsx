@@ -1,13 +1,12 @@
-import { BiSolidShieldAlt2 } from "react-icons/bi";
-import { TiHeartFullOutline } from "react-icons/ti";
-import { StatBar, StatBarSegmented } from "./ui/status-bars";
-import { PlayerStateInterface, usePlayerStateStore } from "@/states/player";
 import { useNuiEvent } from "@/hooks/useNuiEvent";
 import { useMinimapState } from "@/states/minimap";
-import { debug } from "@/utils/debug";
+import { PlayerStateInterface, usePlayerStateStore } from "@/states/player";
 import React, { useCallback } from "preact/compat";
-import { IoFastFood } from "react-icons/io5";
+import { BiSolidShieldAlt2 } from "react-icons/bi";
 import { FaBottleWater } from "react-icons/fa6";
+import { IoFastFood } from "react-icons/io5";
+import { TiHeartFullOutline } from "react-icons/ti";
+import { StatBar, StatBarSegmented } from "./ui/status-bars";
 
 const PlayerStatus = () => {
     const [playerState, setPlayerState] = usePlayerStateStore();

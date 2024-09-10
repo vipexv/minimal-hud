@@ -1,13 +1,13 @@
-import React, { useCallback, useMemo } from "react";
+import { useNuiEvent } from "@/hooks/useNuiEvent";
+import { usePlayerState } from "@/states/player";
 import {
     useVehicleStateStore,
     type VehicleStateInterface,
 } from "@/states/vehicle";
+import { debug } from "@/utils/debug";
+import React, { useCallback, useMemo } from "react";
 import Speedometer from "./ui/speedometer";
 import { TextProgressBar } from "./ui/text-progress-bar";
-import { useNuiEvent } from "@/hooks/useNuiEvent";
-import { usePlayerState } from "@/states/player";
-import { debug } from "@/utils/debug";
 
 const CarHud = React.memo(function CarHud() {
     const [vehicleState, setVehicleState] = useVehicleStateStore();
