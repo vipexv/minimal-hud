@@ -24,3 +24,5 @@ function qbFramework:getPlayerThirst()
   debug("(qbFramework:getPlayerThirst) Returning: ", metadata['thirst'])
   return math.floor(metadata['thirst'])
 end
+
+return qbFramework
