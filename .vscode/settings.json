@@ -1,5 +1,7 @@
 {
   "Lua.diagnostics.disable": [
-    "unused-function"
+    "unused-function",
+    "need-check-nil",
+    "undefined-field"
   ]
 }

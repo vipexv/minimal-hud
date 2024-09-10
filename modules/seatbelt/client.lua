@@ -29,8 +29,8 @@ function SeatbeltLogic.new()
   end, false)
 
   SetFlyThroughWindscreenParams(self.ejectVelocity, self.unknownEjectVelocity, self.unknownModifier, self.minDamage)
-
   RegisterKeyMapping("toggleSeatbelt", "Toggle Seatbelt", "keyboard", "B")
+
 
   return self
 end

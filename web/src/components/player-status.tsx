@@ -6,6 +6,8 @@ import { useNuiEvent } from "@/hooks/useNuiEvent";
 import { useMinimapState } from "@/states/minimap";
 import { debug } from "@/utils/debug";
 import React, { useCallback } from "preact/compat";
+import { IoFastFood } from "react-icons/io5";
+import { FaBottleWater } from "react-icons/fa6";
 
 const PlayerStatus = () => {
     const [playerState, setPlayerState] = usePlayerStateStore();
@@ -40,19 +42,47 @@ const PlayerStatus = () => {
         >
             <div
                 className={
-                    "w-full flex gap-1 items-center justify-center flex-col -mb-11 mr-2 -skew-y-[1deg]"
+                    "w-full flex relative gap-1 items-center justify-center -mb-11 mr-2 -skew-y-[2deg]"
                 }
             >
-                <StatBarSegmented
-                    Icon={<BiSolidShieldAlt2 size={17} />}
-                    value={playerState.armor}
-                    color="#10aef5"
-                />
-                <StatBar
-                    Icon={<TiHeartFullOutline size={17} />}
-                    value={playerState.health}
-                    maxValue={100}
-                />
+                <div
+                    className={
+                        "flex flex-col w-full items-center justify-center gap-1"
+                    }
+                >
+                    <StatBarSegmented
+                        Icon={<BiSolidShieldAlt2 size={17} />}
+                        value={playerState.armor}
+                        color="#10aef5"
+                    />
+                    <StatBar
+                        Icon={<TiHeartFullOutline size={17} />}
+                        value={playerState.health}
+                        maxValue={100}
+                    />
+                </div>
+                {typeof playerState.hunger === "number" &&
+                    typeof playerState.thirst === "number" && (
+                        <>
+                            <div
+                                className={
+                                    "flex gap-3 items-center justify-start absolute -right-28 w-[30%] h-[4dvh]"
+                                }
+                            >
+                                <StatBar
+                                    Icon={<IoFastFood />}
+                                    value={playerState.hunger}
+                                    vertical
+                                />
+                                <StatBar
+                                    Icon={<FaBottleWater />}
+                                    value={playerState.thirst}
+                                    color="#10aef5"
+                                    vertical
+                                />
+                            </div>
+                        </>
+                    )}
             </div>
         </div>
     );

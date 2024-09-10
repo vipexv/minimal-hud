@@ -25,11 +25,11 @@ export const StatBar = ({
     return (
         <div
             className={`flex ${
-                vertical ? "flex-col h-24" : "w-full"
+                vertical ? "h-[3dvh]" : "w-full"
             } items-center gap-1`}
             {...props}
         >
-            <div className={`text-white/70`}>{Icon}</div>
+            {!vertical && <div className={`text-white/70`}>{Icon}</div>}
             {!vertical && (
                 <p
                     className="text-xs w-[20px] text-center font-bold"
@@ -42,7 +42,7 @@ export const StatBar = ({
             )}
             <div
                 className={`relative ${
-                    vertical ? "h-full w-2" : "w-full ml-1 h-2"
+                    vertical ? "h-full w-[4px] rounded-full" : "w-full ml-1 h-2"
                 } bg-black/30  rounded-[1px] overflow-hidden`}
             >
                 <div
@@ -55,6 +55,7 @@ export const StatBar = ({
                     }}
                 />
             </div>
+            {vertical && <div className={`text-white/70`}>{Icon}</div>}
         </div>
     );
 };

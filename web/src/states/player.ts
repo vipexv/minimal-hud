@@ -3,6 +3,8 @@ import { atom, useAtom, useAtomValue, useSetAtom } from "jotai";
 export interface PlayerStateInterface {
     health: number;
     armor: number;
+    hunger: number | string;
+    thirst: number | string;
     streetLabel: string;
     areaLabel: string;
     heading: string;
@@ -13,11 +15,13 @@ export interface PlayerStateInterface {
 const mockPlayerState: PlayerStateInterface = {
     health: 100,
     armor: 100,
+    hunger: 50,
+    thirst: 100,
     streetLabel: "Downtown Vinewood",
     areaLabel: "Vinewood Blvd",
     heading: "NW",
-    isSeatbeltOn: false,
-    isInVehicle: false,
+    isSeatbeltOn: true,
+    isInVehicle: true,
 };
 
 const playerState = atom<PlayerStateInterface>(mockPlayerState);

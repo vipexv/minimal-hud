@@ -33,7 +33,7 @@ function PlayerStatusThread:setIsVehicleThreadRunning(value)
   self.isVehicleThreadRunning = value
 end
 
-function PlayerStatusThread:start(vehicleStatusThread, seatbeltLogic)
+function PlayerStatusThread:start(vehicleStatusThread, seatbeltLogic, framework)
   CreateThread(function()
     while true do
       local ped = PlayerPedId()
@@ -67,6 +67,8 @@ function PlayerStatusThread:start(vehicleStatusThread, seatbeltLogic)
 
       local pedArmor = GetPedArmour(ped)
       local pedHealth = math.floor(GetEntityHealth(ped) / GetEntityMaxHealth(ped) * 100)
+      local pedHunger = config.framework ~= "none" and framework:getPlayerHunger() or "disabled"
+      local pedThirst = config.framework ~= "none" and framework:getPlayerThirst() or "disabled"
       local isInVehicle = IsPedInAnyVehicle(ped, false)
       local isSeatbeltOn = config.useBuiltInSeatbeltLogic and seatbeltLogic.isSeatbeltOn or
           sharedFunctions.customSeatbeltLogic()
@@ -79,6 +81,8 @@ function PlayerStatusThread:start(vehicleStatusThread, seatbeltLogic)
       local data = {
         health = pedHealth,
         armor = pedArmor,
+        hunger = pedHunger,
+        thirst = pedThirst,
         streetLabel = currentStreet,
         areaLabel = zone,
         heading = compass,

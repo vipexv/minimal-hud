@@ -20,8 +20,8 @@ server_scripts {
     "server/main.lua",
 }
 
-ui_page 'dist/index.html'
--- ui_page 'http://localhost:5173/'
+-- ui_page 'dist/index.html'
+ui_page 'http://localhost:5173/'
 
 files {
     'dist/index.html',
@@ -33,6 +33,7 @@ files {
     "modules/interface/client.lua",
     "modules/utils/shared.lua",
     "modules/seatbelt/client.lua",
+    "modules/frameworks/**/*.lua",
     "modules/threads/client/**/*.lua",
     "data/mapData.lua",
 }
