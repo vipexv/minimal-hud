@@ -24,9 +24,7 @@
   <a href="https://github.com/vipexv/minimal-hud/blob/main/LICENSE">License</a>
 </p>
 
-<p align="center">
- <img src="https://github.com/user-attachments/assets/dc180d43-97f6-46f2-a61f-58d9104a34f5">
-</p>
+![minimal-hud-img](https://github.com/user-attachments/assets/242ae758-5841-4253-9c69-2f30032cdbee)
 
 ## How To Use
 
