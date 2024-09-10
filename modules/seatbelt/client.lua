@@ -11,7 +11,7 @@ function SeatbeltLogic.new()
   end
 
   local self = setmetatable({}, SeatbeltLogic)
-  self.isSeatbeltOn = false
+  self.seatbeltState = false
   self.ejectVelocity = (1 / 2.236936)
   self.unknownEjectVelocity = (2 / 2.236936)
   self.unknownModifier = 17.0
@@ -24,7 +24,7 @@ function SeatbeltLogic.new()
         "(SeatbeltLogic:toggle) Seatbelt is not available either due to the fact that the player is not in a vehicle or on a bike.")
     end
 
-    self:toggle(not self.isSeatbeltOn)
+    self:toggle(not self.seatbeltState)
     debug("(commands:toggleSeatbelt) Toggled seatbelt.")
   end, false)
 
@@ -37,7 +37,7 @@ end
 
 ---@param state boolean
 function SeatbeltLogic:toggle(state)
-  self.isSeatbeltOn = state
+  self.seatbeltState = state
 
   if state then
     SetFlyThroughWindscreenParams(10000.0, 10000.0, 17.0, 500.0)
@@ -52,7 +52,7 @@ end
 function SeatbeltLogic:disableVehicleExitControlThread()
   debug("(SeatbeltLogic:disableVehicleExitControlThread) Thread enabled.")
   Citizen.CreateThread(function()
-    while self.isSeatbeltOn do
+    while self.seatbeltState do
       DisableControlAction(0, 75, true) -- 75: INPUT_VEH_EXIT
       Wait(0)
     end
@@ -61,9 +61,9 @@ function SeatbeltLogic:disableVehicleExitControlThread()
 end
 
 function SeatbeltLogic:isSeatbeltOn()
-  debug("(SeatbeltLogic:isSeatbeltOn) Returning: ", self.isSeatbeltOn)
+  debug("(SeatbeltLogic:isSeatbeltOn) Returning: ", self.seatbeltState)
 
-  return self.isSeatbeltOn
+  return self.seatbeltState
 end
 
 return SeatbeltLogic

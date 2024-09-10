@@ -70,7 +70,7 @@ function PlayerStatusThread:start(vehicleStatusThread, seatbeltLogic, framework)
       local pedHunger = config.framework ~= "none" and framework:getPlayerHunger() or "disabled"
       local pedThirst = config.framework ~= "none" and framework:getPlayerThirst() or "disabled"
       local isInVehicle = IsPedInAnyVehicle(ped, false)
-      local isSeatbeltOn = config.useBuiltInSeatbeltLogic and seatbeltLogic.isSeatbeltOn or
+      local isSeatbeltOn = config.useBuiltInSeatbeltLogic and seatbeltLogic.seatbeltState or
           sharedFunctions.isSeatbeltOn()
 
       if isInVehicle and not self:getIsVehicleThreadRunning() and vehicleStatusThread then
