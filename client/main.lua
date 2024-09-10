@@ -7,6 +7,6 @@ local seatbeltLogicClass = require("modules.seatbelt.client")
 local seatbeltLogic = seatbeltLogicClass.new()
 local playerStatusThread = playerStatusClass.new("main")
 local vehicleStatusThread = vehicleStatusClass.new(playerStatusThread, seatbeltLogic)
-local framework = config.framework ~= "none" and require("modules.frameworks." .. config.framework):new() or false
+local framework = config.framework ~= "none" and require("modules.frameworks." .. config.framework).new() or false
 
 playerStatusThread:start(vehicleStatusThread, seatbeltLogic, framework)
