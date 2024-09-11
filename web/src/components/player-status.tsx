@@ -3,7 +3,7 @@ import { useMinimapState } from "@/states/minimap";
 import { PlayerStateInterface, usePlayerStateStore } from "@/states/player";
 import React, { useCallback } from "preact/compat";
 import { BiSolidShieldAlt2 } from "react-icons/bi";
-import { FaBottleWater } from "react-icons/fa6";
+import { FaBottleWater, FaBrain } from "react-icons/fa6";
 import { IoFastFood } from "react-icons/io5";
 import { TiHeartFullOutline } from "react-icons/ti";
 import { StatBar, StatBarSegmented } from "./ui/status-bars";
@@ -79,6 +79,14 @@ const PlayerStatus = () => {
                                     color="#10aef5"
                                     vertical
                                 />
+                                {typeof playerState.stress === "number" && (
+                                    <StatBar
+                                        Icon={<FaBrain />}
+                                        value={playerState.stress}
+                                        color="#ff5b57"
+                                        vertical
+                                    />
+                                )}
                             </div>
                         </>
                     )}

@@ -25,4 +25,11 @@ function qbFramework:getPlayerThirst()
   return math.floor(metadata['thirst'])
 end
 
+function qbFramework:getPlayerStress()
+  local metadata = qb.Functions.GetPlayerData().metadata
+
+  debug("(qbFramework:getPlayerThirst) Returning: ", metadata['stress'])
+  return math.floor(metadata['stress'])
+end
+
 return qbFramework

@@ -18,6 +18,10 @@ function esxFramework.new()
       if data[i].name == "thirst" then
         self.values.thirst = math.floor(data[i].percent)
       end
+
+      if data[i].name == 'stress' then
+        self.values.stress = math.floor(data[i].percent)
+      end
     end
   end)
 
@@ -30,6 +34,10 @@ end
 
 function esxFramework:getPlayerThirst()
   return self.values.thirst
+end
+
+function esxFramework:getPlayerStress()
+  return self.values.stress
 end
 
 return esxFramework
