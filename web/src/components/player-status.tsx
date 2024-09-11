@@ -79,14 +79,15 @@ const PlayerStatus = () => {
                                     color="#10aef5"
                                     vertical
                                 />
-                                {typeof playerState.stress === "number" && (
-                                    <StatBar
-                                        Icon={<FaBrain />}
-                                        value={playerState.stress}
-                                        color="#ff5b57"
-                                        vertical
-                                    />
-                                )}
+                                {typeof playerState.stress === "number" &&
+                                    playerState.stress > 0 && (
+                                        <StatBar
+                                            Icon={<FaBrain />}
+                                            value={playerState.stress}
+                                            color="#ff5b57"
+                                            vertical
+                                        />
+                                    )}
                             </div>
                         </>
                     )}
