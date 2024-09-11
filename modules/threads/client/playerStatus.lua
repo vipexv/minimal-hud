@@ -3,6 +3,7 @@ local mapData = require('data.mapData')
 local debug = require("modules.utils.shared").debug
 local interface = require("modules.interface.client")
 local config = require("config.shared")
+local utility = require("modules.utils.shared")
 local sharedFunctions = require("config.functions")
 
 local PlayerStatusThread = {}
@@ -49,11 +50,12 @@ function PlayerStatusThread:start(vehicleStatusThread, seatbeltLogic, framework)
         currentStreet = mapData.streets[currentStreet]
       end
 
-      if mapData.streets[currentArea] then
-        currentArea = mapData.streets[currentArea]
+      if mapData.areas[currentArea] then
+        currentArea = mapData.areas[currentArea]
       end
 
-      local heading = GetEntityHeading(ped)
+      local camRot = GetGameplayCamRot(0)
+      local heading = utility.round(360.0 - ((camRot.z + 360.0) % 360.0))
       local compass = " "
       if (heading >= 0 and heading < 45) or (heading >= 315 and heading < 360) then
         compass = "N"

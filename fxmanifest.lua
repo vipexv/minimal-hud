@@ -3,7 +3,7 @@ fx_version "cerulean"
 game "gta5"
 
 author "vipex <discord:vipex.v>"
-version "1.0.0"
+version "1.0.1"
 repository 'https://github.com/vipexv/minimal-hud'
 
 shared_scripts {
