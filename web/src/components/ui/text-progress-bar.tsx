@@ -25,13 +25,17 @@ export const TextProgressBar = ({
             }
             {...props}
         >
-            <h1 className={"uppercase text-base font-geist font-bold"}>
+            <h1
+                className={
+                    "uppercase 4k:text-2xl 2k:text-lg text-base font-geist font-bold"
+                }
+            >
                 {label}
             </h1>
 
             <div
                 className={
-                    "relative w-[80%] bg-black/20 shadow h-[3.5px] rounded-full"
+                    "relative w-[80%] bg-black/20 shadow h-[3.5px] 4k:h-[5px] 4k:mt-1 rounded-full"
                 }
             >
                 <div

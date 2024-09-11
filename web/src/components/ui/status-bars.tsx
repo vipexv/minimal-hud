@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { TiHeartFullOutline } from "react-icons/ti";
 
 interface StatBarProps extends React.HTMLAttributes<HTMLDivElement> {
-    Icon?: React.ReactNode;
+    Icon?: React.ComponentType<{ className?: string }>;
     value?: number;
     maxValue?: number;
     color?: string;
@@ -10,7 +10,7 @@ interface StatBarProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const StatBar = ({
-    Icon = <TiHeartFullOutline size={20} />,
+    Icon = TiHeartFullOutline,
     value = 20,
     maxValue = 100,
     color = "#94f024",
@@ -26,13 +26,15 @@ export const StatBar = ({
         <div
             className={`flex ${
                 vertical ? "h-[3dvh]" : "w-full"
-            } items-center gap-1`}
+            } items-center gap-1 4k:gap-2`}
             {...props}
         >
-            {!vertical && <div className={`text-white/70`}>{Icon}</div>}
+            {!vertical && (
+                <Icon className="text-white/70 4k:text-2xl 2k:text-xl" />
+            )}
             {!vertical && (
                 <p
-                    className="text-xs w-[20px] text-center font-bold"
+                    className="text-xs w-[20px] 4k:text-base 2k:text-sm text-center font-bold"
                     style={{
                         color: color,
                     }}
@@ -42,7 +44,9 @@ export const StatBar = ({
             )}
             <div
                 className={`relative ${
-                    vertical ? "h-full w-[4px] rounded-full" : "w-full ml-1 h-2"
+                    vertical
+                        ? "h-full 2k:w-[6px] w-[4px] 4k:w-[8px] rounded-full"
+                        : "w-full ml-1 h-2 2k:h-3"
                 } bg-black/30  rounded-[1px] overflow-hidden`}
             >
                 <div
@@ -55,19 +59,21 @@ export const StatBar = ({
                     }}
                 />
             </div>
-            {vertical && <div className={`text-white/70`}>{Icon}</div>}
+            {vertical && (
+                <Icon className="text-white/70 4k:text-2xl 2k:text-xl" />
+            )}
         </div>
     );
 };
 
 interface StatBarSegmentedProps extends React.HTMLAttributes<HTMLDivElement> {
-    Icon?: React.ReactNode;
+    Icon?: React.ComponentType<{ className?: string }>;
     value?: number;
     color?: string;
 }
 
 export const StatBarSegmented = ({
-    Icon = <TiHeartFullOutline size={20} />,
+    Icon = TiHeartFullOutline,
     value = 20,
     color = "#94f024",
     ...props
@@ -93,15 +99,15 @@ export const StatBarSegmented = ({
     );
 
     return (
-        <div className="flex items-center gap-1 w-full" {...props}>
-            <div className="text-white/70">{Icon}</div>
+        <div className="flex items-center gap-1 w-full 4k:gap-2" {...props}>
+            <Icon className="text-white/70 4k:text-2xl 2k:text-xl" />
             <p
-                className="text-xs w-[20px] text-center font-bold"
+                className="text-xs 2k:text-sm 4k:text-base w-[20px] text-center font-bold"
                 style={{ color: color }}
             >
                 {value}
             </p>
-            <div className="relative flex gap-3 w-full ml-1 h-[8px] rounded-[1px]">
+            <div className="relative flex gap-3 w-full ml-1 h-[8px] 2k:h-3 rounded-[1px]">
                 {segmentFills.map((fill, index) => (
                     <svg
                         key={index}

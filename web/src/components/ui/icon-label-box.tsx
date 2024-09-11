@@ -26,10 +26,15 @@ const IconLabelBox: React.FC<IconLabelBoxProps> = ({
             )}
             {...props}
         >
-            <Icon className={twMerge("mr-2", iconClassName)} />
+            <Icon
+                className={twMerge(
+                    "mr-2 2k:text-lg 4k:text-2xl",
+                    iconClassName
+                )}
+            />
             <p
                 className={twMerge(
-                    `text-center text-white font-bold text-sm`,
+                    `text-center text-white font-bold 4k:text-2xl text-sm 2k:text-base`,
                     textClassName
                 )}
                 style={{

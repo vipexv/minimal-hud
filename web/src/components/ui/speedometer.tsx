@@ -109,7 +109,7 @@ const Speedometer: React.FC<SpeedometerProps> = React.memo(
         );
 
         return (
-            <div className="w-60 h-64 relative flex items-center justify-center -mb-20 z-0 -skew-x-[4deg]">
+            <div className="w-60 2k:w-[15dvw] 2k:h-[21dvh] 4k:w-[10dvw] 4k:h-[20dvh] h-64 relative flex items-center justify-center -mb-20 z-0 -skew-x-[4deg]">
                 <svg
                     viewBox="-50 -50 100 100"
                     preserveAspectRatio="xMidYMid meet"
@@ -152,10 +152,10 @@ const Speedometer: React.FC<SpeedometerProps> = React.memo(
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center -skew-x-[10deg]">
                     <div className="text-center flex flex-col">
-                        <span className="text-4xl font-bold text-white tabular-nums">
+                        <span className="text-4xl font-bold text-white tabular-nums 4k:text-5xl">
                             {speed}
                         </span>
-                        <span className="text-xl -mt-1 font-semibold text-gray-400">
+                        <span className="text-xl 4k:text-2xl -mt-1 font-semibold text-gray-400">
                             MPH
                         </span>
                     </div>

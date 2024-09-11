@@ -41,7 +41,7 @@ const PlayerStatus = () => {
         >
             <div
                 className={
-                    "w-full flex relative gap-1 items-center justify-center -mb-11 mr-2 -skew-y-[2deg]"
+                    "w-full flex relative gap-1 items-center justify-center -mb-12 2k:-mb-14 4k:-mb-16 mr-2"
                 }
             >
                 <div
@@ -50,12 +50,12 @@ const PlayerStatus = () => {
                     }
                 >
                     <StatBarSegmented
-                        Icon={<BiSolidShieldAlt2 size={17} />}
+                        Icon={BiSolidShieldAlt2}
                         value={playerState.armor}
                         color="#10aef5"
                     />
                     <StatBar
-                        Icon={<TiHeartFullOutline size={17} />}
+                        Icon={TiHeartFullOutline}
                         value={playerState.health}
                         maxValue={100}
                     />
@@ -65,16 +65,16 @@ const PlayerStatus = () => {
                         <>
                             <div
                                 className={
-                                    "flex gap-3 items-center justify-start absolute -right-28 w-[30%] h-[4dvh]"
+                                    "flex gap-3 items-center justify-start absolute 2k:-right-36 4k:-right-52 -right-28 w-[30%] h-[4dvh]"
                                 }
                             >
                                 <StatBar
-                                    Icon={<IoFastFood />}
+                                    Icon={IoFastFood}
                                     value={playerState.hunger}
                                     vertical
                                 />
                                 <StatBar
-                                    Icon={<FaBottleWater />}
+                                    Icon={FaBottleWater}
                                     value={playerState.thirst}
                                     color="#10aef5"
                                     vertical
@@ -82,7 +82,7 @@ const PlayerStatus = () => {
                                 {typeof playerState.stress === "number" &&
                                     playerState.stress > 0 && (
                                         <StatBar
-                                            Icon={<FaBrain />}
+                                            Icon={FaBrain}
                                             value={playerState.stress}
                                             color="#ff5b57"
                                             vertical

@@ -15,7 +15,11 @@ const Compass = () => {
                     className="min-w-[20%]"
                     Icon={FaLocationDot}
                 />
-                <IconLabelBox label={playerState.areaLabel} Icon={FaMap} />
+                <IconLabelBox
+                    className="px-3"
+                    label={playerState.areaLabel}
+                    Icon={FaMap}
+                />
             </div>
         </div>
     );

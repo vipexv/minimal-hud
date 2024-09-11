@@ -50,7 +50,7 @@ const CarHud = React.memo(function CarHud() {
                     gears={vehicleState.gears}
                     maxRpm={100}
                 />
-                <div className={"flex gap-2 items-center mr-2"}>
+                <div className={"flex gap-2 items-center mr-2 4k:-mt-14"}>
                     <TextProgressBar label="FUEL" value={vehicleState.fuel} />
                     <TextProgressBar label="ENG" value={vehicleState.engine} />
                     <TextProgressBar
