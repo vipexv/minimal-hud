@@ -75,6 +75,27 @@ utility.debug = function(...)
     print(message)
 end
 
+--- Checks whether the specified framework is valid.
+---@return boolean
+utility.isFrameworkValid = function()
+    local framework = config.framework and config.framework:lower() or nil
+
+    if not framework then
+        utility.debug("(utility:isFrameworkValid) No framework specified, defaulting to 'none'.")
+        return false
+    end
+
+    local validFrameworks = {
+        esx = true,
+        qb = true,
+        ox = true
+    }
+
+    utility.debug("(utility:isFrameworkValid) Checking if framework is valid: ", validFrameworks[framework] ~= nil)
+    return validFrameworks[framework] ~= nil
+end
+
+
 utility.setupMinimap = function()
     utility.debug("(utility:setupMinimap) Setting up minimap.")
     local defaultAspectRatio = 1920 / 1080
@@ -92,8 +113,6 @@ utility.setupMinimap = function()
         Wait(100)
     end
 
-    SetMinimapClipType(0)
-
     AddReplaceTexture('platform:/textures/graphics', 'radarmasksm', 'squaremap', 'radarmasksm')
     AddReplaceTexture('platform:/textures/graphics', 'radarmask1g', 'squaremap', 'radarmasksm')
 
@@ -102,6 +121,7 @@ utility.setupMinimap = function()
     SetMinimapComponentPosition('minimap_blur', 'L', 'B', -0.01 + minimapOffset, 0.025, 0.262, 0.300)
 
     SetBlipAlpha(GetNorthRadarBlip(), 0)
+    SetMinimapClipType(0)
 end
 
 ---@param coords vector3
