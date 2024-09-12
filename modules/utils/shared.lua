@@ -88,7 +88,8 @@ utility.isFrameworkValid = function()
     local validFrameworks = {
         esx = true,
         qb = true,
-        ox = true
+        ox = true,
+        custom = true,
     }
 
     utility.debug("(utility:isFrameworkValid) Checking if framework is valid: ", validFrameworks[framework] ~= nil)
