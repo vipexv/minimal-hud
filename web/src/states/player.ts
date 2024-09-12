@@ -22,8 +22,8 @@ const mockPlayerState: PlayerStateInterface = {
     streetLabel: "Downtown Vinewood",
     areaLabel: "Vinewood Blvd",
     heading: "NW",
-    isSeatbeltOn: true,
-    isInVehicle: true,
+    isSeatbeltOn: false,
+    isInVehicle: false,
 };
 
 const playerState = atom<PlayerStateInterface>(mockPlayerState);

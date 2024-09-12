@@ -3,7 +3,8 @@ import { atom, useAtom, useAtomValue, useSetAtom } from "jotai";
 export interface VehicleStateInterface {
     speed: number;
     rpm: number;
-    engine: number;
+    engineState: boolean;
+    engineHealth: number;
     gears: number;
     fuel: number;
 }
@@ -11,7 +12,8 @@ export interface VehicleStateInterface {
 const mockVehicleState: VehicleStateInterface = {
     speed: 42,
     rpm: 20,
-    engine: 50,
+    engineState: true,
+    engineHealth: 50,
     gears: 8,
     fuel: 50,
 };

@@ -1,14 +1,22 @@
 import React, { useEffect, useMemo, useRef } from "react";
+import { PiEngineFill } from "react-icons/pi";
 
 interface SpeedometerProps {
     speed: number;
     maxRpm: number;
     rpm: number;
     gears: number;
+    engineHealth: number;
 }
 
 const Speedometer: React.FC<SpeedometerProps> = React.memo(
-    function Speedometer({ speed = 42, maxRpm = 100, rpm = 20, gears = 8 }) {
+    function Speedometer({
+        speed = 42,
+        maxRpm = 100,
+        rpm = 20,
+        gears = 8,
+        engineHealth = 50,
+    }) {
         const percentage = useMemo(() => (rpm / maxRpm) * 100, [rpm, maxRpm]);
         const activeArcRef = useRef<SVGPathElement>(null);
 
@@ -109,7 +117,7 @@ const Speedometer: React.FC<SpeedometerProps> = React.memo(
         );
 
         return (
-            <div className="w-60 2k:w-[15dvw] 2k:h-[21dvh] 4k:w-[10dvw] 4k:h-[20dvh] h-64 relative flex items-center justify-center -mb-20 z-0 -skew-x-[4deg]">
+            <div className="w-60 2k:w-[15dvw] 2k:h-[21dvh] 4k:w-[10dvw] 4k:h-[20dvh] h-64 relative flex items-center justify-center -mb-20 z-0">
                 <svg
                     viewBox="-50 -50 100 100"
                     preserveAspectRatio="xMidYMid meet"
@@ -142,7 +150,7 @@ const Speedometer: React.FC<SpeedometerProps> = React.memo(
                             className={`transition-all duration-300 ease-in-out ${
                                 percentage >= 90
                                     ? "stroke-red-600"
-                                    : percentage >= 80
+                                    : percentage >= 85
                                     ? "stroke-yellow-500"
                                     : "stroke-primary"
                             }`}
@@ -150,7 +158,7 @@ const Speedometer: React.FC<SpeedometerProps> = React.memo(
                     </g>
                     {gearLines}
                 </svg>
-                <div className="absolute inset-0 flex items-center justify-center -skew-x-[10deg]">
+                <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-center flex flex-col">
                         <span className="text-4xl font-bold text-white tabular-nums 4k:text-5xl">
                             {speed}
@@ -158,6 +166,15 @@ const Speedometer: React.FC<SpeedometerProps> = React.memo(
                         <span className="text-xl 4k:text-2xl -mt-1 font-semibold text-gray-400">
                             MPH
                         </span>
+                        {engineHealth < 30 && (
+                            <div
+                                className={
+                                    "flex items-center justify-center *:text-xl 2k:text-2xl 4k:text-3xl mt-1s"
+                                }
+                            >
+                                <PiEngineFill color="#fc5c58" />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

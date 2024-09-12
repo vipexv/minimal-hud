@@ -35,13 +35,15 @@ function VehicleStatusThread:start()
       local speed = math.floor(GetEntitySpeed(vehicle) * 2.236936)
       local rpm = convertRpmToPercentage(GetVehicleCurrentRpm(vehicle))
       local fuelValue = math.max(0, math.min(functions.getVehicleFuel(vehicle), 100))
+      local engineState = GetIsVehicleEngineRunning(vehicle)
       local fuel = math.floor(fuelValue)
       local gears = GetVehicleHighGear(vehicle)
 
       interface.message("setVehicleState", {
         speed = speed,
         rpm = rpm,
-        engine = engineHealth,
+        engineHealth = engineHealth,
+        engineState = engineState,
         gears = gears,
         fuel = fuel,
       })
