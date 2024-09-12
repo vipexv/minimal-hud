@@ -140,9 +140,9 @@ const Speedometer: React.FC<SpeedometerProps> = React.memo(
                             fill="none"
                             strokeWidth="5"
                             className={`transition-all duration-300 ease-in-out ${
-                                percentage >= 80
+                                percentage >= 90
                                     ? "stroke-red-600"
-                                    : percentage >= 50
+                                    : percentage >= 80
                                     ? "stroke-yellow-500"
                                     : "stroke-primary"
                             }`}
