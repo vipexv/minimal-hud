@@ -1,4 +1,4 @@
--- Tthis logic is originally from the ox_lib resource, all i did was migrate and slightly modify this to feet my needs to utilize in my future projects.
+-- This logic is originally from the ox_lib resource, all i did was migrate and slightly modify this to feet my needs to utilize in my future projects.
 
 ---@diagnostic disable: lowercase-global
 local loaded = {}
