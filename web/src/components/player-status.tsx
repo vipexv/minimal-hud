@@ -9,91 +9,91 @@ import { TiHeartFullOutline } from "react-icons/ti";
 import { StatBar, StatBarSegmented } from "./ui/status-bars";
 
 const PlayerStatus = () => {
-    const [playerState, setPlayerState] = usePlayerStateStore();
-    const minimap = useMinimapState();
+  const [playerState, setPlayerState] = usePlayerStateStore();
+  const minimap = useMinimapState();
 
-    const handlePlayerStateUpdate = useCallback(
-        (newState: PlayerStateInterface) => {
-            setPlayerState((prevState) => {
-                if (JSON.stringify(prevState) !== JSON.stringify(newState)) {
-                    return newState;
-                }
-                return prevState;
-            });
-        },
-        [setPlayerState]
-    );
+  const handlePlayerStateUpdate = useCallback(
+    (newState: PlayerStateInterface) => {
+      setPlayerState((prevState) => {
+        if (JSON.stringify(prevState) !== JSON.stringify(newState)) {
+          return newState;
+        }
+        return prevState;
+      });
+    },
+    [setPlayerState]
+  );
 
-    useNuiEvent<PlayerStateInterface>(
-        "setPlayerState",
-        handlePlayerStateUpdate
-    );
+  useNuiEvent<PlayerStateInterface>(
+    "setPlayerState",
+    handlePlayerStateUpdate
+  );
 
-    return (
+  return (
+    <div
+      className={"absolute flex items-end justify-center"}
+      style={{
+        top: minimap.top + "%",
+        left: minimap.left + "%",
+        width: minimap.width + "px",
+        height: minimap.height + "px",
+      }}
+    >
+      <div
+        className={
+          "w-full flex relative gap-1 items-center justify-center -mb-12 2k:-mb-14 4k:-mb-16 mr-2"
+        }
+      >
         <div
-            className={"absolute flex items-end justify-center"}
-            style={{
-                top: minimap.top + "%",
-                left: minimap.left + "%",
-                width: minimap.width + "px",
-                height: minimap.height + "px",
-            }}
+          className={
+            "flex flex-col w-full items-center justify-center gap-1"
+          }
         >
-            <div
-                className={
-                    "w-full flex relative gap-1 items-center justify-center -mb-12 2k:-mb-14 4k:-mb-16 mr-2"
-                }
-            >
-                <div
-                    className={
-                        "flex flex-col w-full items-center justify-center gap-1"
-                    }
-                >
-                    <StatBarSegmented
-                        Icon={BiSolidShieldAlt2}
-                        value={playerState.armor}
-                        color="#10aef5"
-                    />
-                    <StatBar
-                        Icon={TiHeartFullOutline}
-                        value={playerState.health}
-                        maxValue={100}
-                    />
-                </div>
-                {typeof playerState.hunger === "number" &&
-                    typeof playerState.thirst === "number" && (
-                        <>
-                            <div
-                                className={
-                                    "flex gap-3 items-center justify-start absolute 2k:-right-36 4k:-right-52 -right-28 w-[30%] h-[4dvh]"
-                                }
-                            >
-                                <StatBar
-                                    Icon={IoFastFood}
-                                    value={playerState.hunger}
-                                    vertical
-                                />
-                                <StatBar
-                                    Icon={FaBottleWater}
-                                    value={playerState.thirst}
-                                    color="#10aef5"
-                                    vertical
-                                />
-                                {typeof playerState.stress === "number" &&
-                                    playerState.stress > 0 && (
-                                        <StatBar
-                                            Icon={FaBrain}
-                                            value={playerState.stress}
-                                            color="#ff5b57"
-                                            vertical
-                                        />
-                                    )}
-                            </div>
-                        </>
-                    )}
-            </div>
+          <StatBarSegmented
+            Icon={BiSolidShieldAlt2}
+            value={playerState.armor}
+            color="#10aef5"
+          />
+          <StatBar
+            Icon={TiHeartFullOutline}
+            value={playerState.health}
+            maxValue={100}
+          />
         </div>
-    );
+        {typeof playerState.hunger === "number" &&
+          typeof playerState.thirst === "number" && (
+            <>
+              <div
+                className={
+                  "flex gap-3 items-center justify-start absolute 2k:-right-36 4k:-right-52 -right-28 w-[30%] h-[4dvh]"
+                }
+              >
+                <StatBar
+                  Icon={IoFastFood}
+                  value={playerState.hunger}
+                  vertical
+                />
+                <StatBar
+                  Icon={FaBottleWater}
+                  value={playerState.thirst}
+                  color="#10aef5"
+                  vertical
+                />
+                {typeof playerState.stress === "number" &&
+                  playerState.stress > 0 && (
+                    <StatBar
+                      Icon={FaBrain}
+                      value={playerState.stress}
+                      color="#ff5b57"
+                      vertical
+                    />
+                  )}
+              </div>
+            </>
+          )}
+      </div>
+    </div>
+  );
 };
 
 export default React.memo(PlayerStatus);
