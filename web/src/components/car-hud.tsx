@@ -64,7 +64,7 @@ const CarHud = React.memo(function CarHud() {
         </div>
       </div>
     );
-  }, [playerState.isInVehicle, vehicleState]);
+  }, [playerState.isInVehicle, vehicleState, playerState.isSeatbeltOn]);
 
   return content;
 });
