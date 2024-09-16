@@ -8,49 +8,30 @@ qbFramework.__index = qbFramework
 function qbFramework.new()
 	debug("(qbFramework:new) Created new instance.")
 	local self = setmetatable({}, qbFramework)
+	self.values = {}
+
+	RegisterNetEvent("hud:client:UpdateNeeds", function(hunger, thirst)
+		self.values.hunger = hunger
+		self.values.thirst = thirst
+	end)
+
+	RegisterNetEvent("hud:client:UpdateStress", function(stress)
+		self.values.stress = stress
+	end)
+
 	return self
 end
 
 function qbFramework:getPlayerHunger()
-	local playerData = qb.Functions.GetPlayerData()
-
-	if not playerData.metadata then
-		debug("(qbFramework:getPlayerHunger) PlayerData.metadata is nil, returning 0")
-		return "disabled"
-	end
-
-	local metadata = playerData.metadata
-
-	debug("(qbFramework:getPlayerHunger) Returning: ", metadata["hunger"])
-	return math.floor(metadata["hunger"])
+	return self.values.hunger or "disabled"
 end
 
 function qbFramework:getPlayerThirst()
-	local playerData = qb.Functions.GetPlayerData()
-
-	if not playerData.metadata then
-		debug("(qbFramework:getPlayerThirst) PlayerData.metadata is nil, returning 0")
-		return "disabled"
-	end
-
-	local metadata = playerData.metadata
-
-	debug("(qbFramework:getPlayerThirst) Returning: ", metadata["thirst"])
-	return math.floor(metadata["thirst"])
+	return self.values.thirst or "disabled"
 end
 
 function qbFramework:getPlayerStress()
-	local playerData = qb.Functions.GetPlayerData()
-
-	if not playerData.metadata then
-		debug("(qbFramework:getPlayerStress) PlayerData.metadata is nil, returning 0")
-		return "disabled"
-	end
-
-	local metadata = playerData.metadata
-
-	debug("(qbFramework:getPlayerThirst) Returning: ", metadata["stress"])
-	return math.floor(metadata["stress"])
+	return self.values.stress or "disabled"
 end
 
 return qbFramework
