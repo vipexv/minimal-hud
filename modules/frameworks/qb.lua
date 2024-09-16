@@ -6,30 +6,51 @@ local qbFramework = {}
 qbFramework.__index = qbFramework
 
 function qbFramework.new()
-  debug("(qbFramework:new) Created new instance.")
-  local self = setmetatable({}, qbFramework)
-  return self
+	debug("(qbFramework:new) Created new instance.")
+	local self = setmetatable({}, qbFramework)
+	return self
 end
 
 function qbFramework:getPlayerHunger()
-  local metadata = qb.Functions.GetPlayerData().metadata
+	local playerData = qb.Functions.GetPlayerData()
 
-  debug("(qbFramework:getPlayerHunger) Returning: ", metadata['hunger'])
-  return math.floor(metadata['hunger'])
+	if not playerData.metadata then
+		debug("(qbFramework:getPlayerHunger) PlayerData.metadata is nil, returning 0")
+		return "disabled"
+	end
+
+	local metadata = playerData.metadata
+
+	debug("(qbFramework:getPlayerHunger) Returning: ", metadata["hunger"])
+	return math.floor(metadata["hunger"])
 end
 
 function qbFramework:getPlayerThirst()
-  local metadata = qb.Functions.GetPlayerData().metadata
+	local playerData = qb.Functions.GetPlayerData()
 
-  debug("(qbFramework:getPlayerThirst) Returning: ", metadata['thirst'])
-  return math.floor(metadata['thirst'])
+	if not playerData.metadata then
+		debug("(qbFramework:getPlayerThirst) PlayerData.metadata is nil, returning 0")
+		return "disabled"
+	end
+
+	local metadata = playerData.metadata
+
+	debug("(qbFramework:getPlayerThirst) Returning: ", metadata["thirst"])
+	return math.floor(metadata["thirst"])
 end
 
 function qbFramework:getPlayerStress()
-  local metadata = qb.Functions.GetPlayerData().metadata
+	local playerData = qb.Functions.GetPlayerData()
 
-  debug("(qbFramework:getPlayerThirst) Returning: ", metadata['stress'])
-  return math.floor(metadata['stress'])
+	if not playerData.metadata then
+		debug("(qbFramework:getPlayerStress) PlayerData.metadata is nil, returning 0")
+		return "disabled"
+	end
+
+	local metadata = playerData.metadata
+
+	debug("(qbFramework:getPlayerThirst) Returning: ", metadata["stress"])
+	return math.floor(metadata["stress"])
 end
 
 return qbFramework
