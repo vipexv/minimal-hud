@@ -4,7 +4,7 @@ game("gta5")
 
 name("minimal-hud")
 author("vipex <discord:vipex.v>")
-version("1.0.4")
+version("1.0.5")
 repository("https://github.com/vipexv/minimal-hud")
 
 shared_scripts({
@@ -22,7 +22,7 @@ server_scripts({
 })
 
 ui_page("dist/index.html")
--- ui_page 'http://localhost:5173/'
+-- ui_page("http://localhost:5173/")
 
 files({
 	"dist/index.html",
