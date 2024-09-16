@@ -10,12 +10,12 @@ local debug = utility.debug
 local seatbeltLogic = seatbeltLogicClass.new()
 local playerStatusThread = playerStatusClass.new("main")
 local vehicleStatusThread = vehicleStatusClass.new(playerStatusThread, seatbeltLogic)
-local framework = utility.isFrameworkValid() and require("modules.frameworks." .. config.framework:lower()).new() or
-    false
+local framework = utility.isFrameworkValid() and require("modules.frameworks." .. config.framework:lower()).new()
+	or false
 
 playerStatusThread:start(vehicleStatusThread, seatbeltLogic, framework)
 
 exports("toggleHud", function(state)
-  interface.toggle(state or nil)
-  debug("(exports:toggleHud) Toggled HUD to state: ", state)
+	interface.toggle(state or nil)
+	debug("(exports:toggleHud) Toggled HUD to state: ", state)
 end)

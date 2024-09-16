@@ -5,15 +5,15 @@ local loaded = {}
 Class = {}
 
 package = {
-    loaded = setmetatable({}, {
-        __index = loaded,
-        __metatable = false,
-    }),
-    path = './?.lua;'
+	loaded = setmetatable({}, {
+		__index = loaded,
+		__metatable = false,
+	}),
+	path = "./?.lua;",
 }
 
 cache = {
-    resource = GetCurrentResourceName()
+	resource = GetCurrentResourceName(),
 }
 
 local _require = require
@@ -22,97 +22,101 @@ local _require = require
 ---@param env? table
 ---@return any
 function Class.load(filePath, env)
-    local modpath = filePath:gsub('%.', '/')
-    local resourceSrc = cache.resource
+	local modpath = filePath:gsub("%.", "/")
+	local resourceSrc = cache.resource
 
-    for path in package.path:gmatch('[^;]+') do
-        local scriptPath = path:gsub('?', modpath):gsub('%.+%/+', '')
-        local resourceFile = LoadResourceFile(resourceSrc, scriptPath)
+	for path in package.path:gmatch("[^;]+") do
+		local scriptPath = path:gsub("?", modpath):gsub("%.+%/+", "")
+		local resourceFile = LoadResourceFile(resourceSrc, scriptPath)
 
-        if resourceFile then
-            local chunk, err = load(resourceFile, ('@@%s/%s'):format(resourceSrc, scriptPath), 't', env or _ENV)
+		if resourceFile then
+			local chunk, err = load(resourceFile, ("@@%s/%s"):format(resourceSrc, scriptPath), "t", env or _ENV)
 
-            if not chunk or err then
-                error(err or 'an unknown error occurred', 2)
-            end
+			if not chunk or err then
+				error(err or "an unknown error occurred", 2)
+			end
 
-            return chunk()
-        end
-    end
+			return chunk()
+		end
+	end
 
-    error(('cannot load file at path %s'):format(modpath))
+	error(("cannot load file at path %s"):format(modpath))
 end
 
 function Class.loadJson(filePath)
-    local modpath = filePath:gsub('%.', '/')
-    local resourceSrc = cache.resource
-    local scriptPath = ('%s.json'):format(modpath)
-    local resourceFile = LoadResourceFile(resourceSrc, scriptPath)
+	local modpath = filePath:gsub("%.", "/")
+	local resourceSrc = cache.resource
+	local scriptPath = ("%s.json"):format(modpath)
+	local resourceFile = LoadResourceFile(resourceSrc, scriptPath)
 
-    if resourceFile then
-        return json.decode(resourceFile)
-    end
+	if resourceFile then
+		return json.decode(resourceFile)
+	end
 
-    error(('cannot load json file at path %s'):format(modpath))
+	error(("cannot load json file at path %s"):format(modpath))
 end
 
 function Class.require(modname)
-    if type(modname) ~= 'string' then return end
+	if type(modname) ~= "string" then
+		return
+	end
 
-    local modpath = modname:gsub('%.', '/')
-    local module = loaded[modname]
+	local modpath = modname:gsub("%.", "/")
+	local module = loaded[modname]
 
-    if module then return module end
+	if module then
+		return module
+	end
 
-    local success, result = pcall(_require, modname)
+	local success, result = pcall(_require, modname)
 
-    if success then
-        loaded[modname] = result
-        return result
-    end
+	if success then
+		loaded[modname] = result
+		return result
+	end
 
-    local resourceSrc = cache.resource
+	local resourceSrc = cache.resource
 
-    if not modpath:find('^@') then
-        modname = ('@%s.%s'):format(resourceSrc, modname)
-    end
+	if not modpath:find("^@") then
+		modname = ("@%s.%s"):format(resourceSrc, modname)
+	end
 
-    if not module then
-        if module == false then
-            error(("^1circular-dependency occurred when loading module '%s'^0"):format(modname), 2)
-        end
+	if not module then
+		if module == false then
+			error(("^1circular-dependency occurred when loading module '%s'^0"):format(modname), 2)
+		end
 
-        if not resourceSrc then
-            resourceSrc = modpath:gsub('^@(.-)/.+', '%1')
-            modpath = modpath:sub(#resourceSrc + 3)
-        end
+		if not resourceSrc then
+			resourceSrc = modpath:gsub("^@(.-)/.+", "%1")
+			modpath = modpath:sub(#resourceSrc + 3)
+		end
 
-        for path in package.path:gmatch('[^;]+') do
-            local scriptPath = path:gsub('?', modpath):gsub('%.+%/+', '')
-            local resourceFile = LoadResourceFile(resourceSrc, scriptPath)
+		for path in package.path:gmatch("[^;]+") do
+			local scriptPath = path:gsub("?", modpath):gsub("%.+%/+", "")
+			local resourceFile = LoadResourceFile(resourceSrc, scriptPath)
 
-            if resourceFile then
-                loaded[modname] = false
-                scriptPath = ('@@%s/%s'):format(resourceSrc, scriptPath)
+			if resourceFile then
+				loaded[modname] = false
+				scriptPath = ("@@%s/%s"):format(resourceSrc, scriptPath)
 
-                local chunk, err = load(resourceFile, scriptPath)
+				local chunk, err = load(resourceFile, scriptPath)
 
-                if err or not chunk then
-                    loaded[modname] = nil
-                    return error(err or ("unable to load module '%s'"):format(modname), 3)
-                end
+				if err or not chunk then
+					loaded[modname] = nil
+					return error(err or ("unable to load module '%s'"):format(modname), 3)
+				end
 
-                module = chunk(modname) or true
-                loaded[modname] = module
+				module = chunk(modname) or true
+				loaded[modname] = module
 
-                return module
-            end
-        end
+				return module
+			end
+		end
 
-        return error(result, 2)
-    end
+		return error(result, 2)
+	end
 
-    return module
+	return module
 end
 
 require = Class.require

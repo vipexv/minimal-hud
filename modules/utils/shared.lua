@@ -1,137 +1,140 @@
 local utility = {}
-local config = require 'config.shared'
+local config = require("config.shared")
 local currentResourceName = GetCurrentResourceName()
 
 ---@param value number
 ---@return number
 utility.convertRpmToPercentage = function(value)
-    local percentage = math.ceil(value * 10000 - 2001) / 80
-    return math.max(0, math.min(percentage, 100))
+	local percentage = math.ceil(value * 10000 - 2001) / 80
+	return math.max(0, math.min(percentage, 100))
 end
 
 ---@param num number
 ---@param numDecimalPlaces number?
 ---@return integer
 utility.round = function(num, numDecimalPlaces)
-    local mult = 10 ^ (numDecimalPlaces or 0)
-    return math.floor(num + 0.5 * mult)
+	local mult = 10 ^ (numDecimalPlaces or 0)
+	return math.floor(num + 0.5 * mult)
 end
 
 utility.convertEngineHealthToPercentage = function(value)
-    local percentage = ((value + 4000) / 5000) * 100
+	local percentage = ((value + 4000) / 5000) * 100
 
-    percentage = math.max(0, math.min(percentage, 100))
+	percentage = math.max(0, math.min(percentage, 100))
 
-    return percentage
+	return percentage
 end
 
 ---@return {width: number, height: number, left: number, top: number}
 utility.calculateMinimapSizeAndPosition = function()
-    local resolutionX, resolutionY = GetActiveScreenResolution()
-    local aspectRatio = resolutionX / resolutionY
-    local defaultAspectRatio = 1920 / 1080
-    local minimapOffset = 0
-    local safezoneSize = GetSafeZoneSize()
+	local resolutionX, resolutionY = GetActiveScreenResolution()
+	local aspectRatio = resolutionX / resolutionY
+	local defaultAspectRatio = 1920 / 1080
+	local minimapOffset = 0
+	local safezoneSize = GetSafeZoneSize()
 
-    if aspectRatio > defaultAspectRatio then
-        minimapOffset = ((defaultAspectRatio - aspectRatio) / 3.6) - 0.008
-    end
+	if aspectRatio > defaultAspectRatio then
+		minimapOffset = ((defaultAspectRatio - aspectRatio) / 3.6) - 0.008
+	end
 
-    local minimapLeft = 0.0 + minimapOffset
-    local minimapBottom = 1.0 - 0.047
-    local minimapWidth = 0.1638
-    local minimapHeight = 0.183
+	local minimapLeft = 0.0 + minimapOffset
+	local minimapBottom = 1.0 - 0.047
+	local minimapWidth = 0.1638
+	local minimapHeight = 0.183
 
-    local safezoneOffset = (1.0 - safezoneSize) * 0.5
-    minimapLeft = minimapLeft + safezoneOffset
-    minimapBottom = minimapBottom - safezoneOffset
+	local safezoneOffset = (1.0 - safezoneSize) * 0.5
+	minimapLeft = minimapLeft + safezoneOffset
+	minimapBottom = minimapBottom - safezoneOffset
 
-    local pixelWidth = minimapWidth * resolutionX
-    local pixelHeight = minimapHeight * resolutionY
-    local pixelLeft = minimapLeft * resolutionX
-    local pixelTop = (minimapBottom - minimapHeight) * resolutionY
+	local pixelWidth = minimapWidth * resolutionX
+	local pixelHeight = minimapHeight * resolutionY
+	local pixelLeft = minimapLeft * resolutionX
+	local pixelTop = (minimapBottom - minimapHeight) * resolutionY
 
-    return {
-        width = pixelWidth,
-        height = pixelHeight,
-        left = (pixelLeft / resolutionX) * 100,
-        top = (pixelTop / resolutionY) * 100
-    }
+	return {
+		width = pixelWidth,
+		height = pixelHeight,
+		left = (pixelLeft / resolutionX) * 100,
+		top = (pixelTop / resolutionY) * 100,
+	}
 end
 
 ---@param ... any
 utility.debug = function(...)
-    if not config.debug then return end
+	if not config.debug then
+		return
+	end
 
-    local args <const> = { ... }
-    local append = ""
+	local args = { ... }
+	local append = ""
 
-    for _, v in ipairs(args) do
-        append = append .. " " .. tostring(v)
-    end
+	for _, v in ipairs(args) do
+		append = append .. " " .. tostring(v)
+	end
 
-    local template = "^3[%s]^0%s"
-    local message = template:format(currentResourceName, append)
-    print(message)
+	local template = "^3[%s]^0%s"
+	local message = template:format(currentResourceName, append)
+	print(message)
 end
 
 --- Checks whether the specified framework is valid.
 ---@return boolean
 utility.isFrameworkValid = function()
-    local framework = config.framework and config.framework:lower() or nil
+	local framework = config.framework and config.framework:lower() or nil
 
-    if not framework then
-        utility.debug("(utility:isFrameworkValid) No framework specified, defaulting to 'none'.")
-        return false
-    end
+	if not framework then
+		utility.debug("(utility:isFrameworkValid) No framework specified, defaulting to 'none'.")
+		return false
+	end
 
-    local validFrameworks = {
-        esx = true,
-        qb = true,
-        ox = true,
-        custom = true,
-    }
+	local validFrameworks = {
+		esx = true,
+		qb = true,
+		ox = true,
+		custom = true,
+	}
 
-    utility.debug("(utility:isFrameworkValid) Checking if framework is valid: ", validFrameworks[framework] ~= nil)
-    return validFrameworks[framework] ~= nil
+	utility.debug("(utility:isFrameworkValid) Checking if framework is valid: ", validFrameworks[framework] ~= nil)
+	return validFrameworks[framework] ~= nil
 end
 
-
 utility.setupMinimap = function()
-    utility.debug("(utility:setupMinimap) Setting up minimap.")
-    local defaultAspectRatio = 1920 / 1080
-    local resolutionX, resolutionY = GetActiveScreenResolution()
-    local aspectRatio = resolutionX / resolutionY
-    local minimapOffset = 0
+	utility.debug("(utility:setupMinimap) Setting up minimap.")
+	local defaultAspectRatio = 1920 / 1080
+	local resolutionX, resolutionY = GetActiveScreenResolution()
+	local aspectRatio = resolutionX / resolutionY
+	local minimapOffset = 0
 
-    if aspectRatio > defaultAspectRatio then
-        minimapOffset = ((defaultAspectRatio - aspectRatio) / 3.6) - 0.008
-    end
+	if aspectRatio > defaultAspectRatio then
+		minimapOffset = ((defaultAspectRatio - aspectRatio) / 3.6) - 0.008
+	end
 
-    RequestStreamedTextureDict('squaremap', false)
+	RequestStreamedTextureDict("squaremap", false)
 
-    while not HasStreamedTextureDictLoaded('squaremap') do
-        Wait(100)
-    end
+	while not HasStreamedTextureDictLoaded("squaremap") do
+		Wait(100)
+	end
 
-    AddReplaceTexture('platform:/textures/graphics', 'radarmasksm', 'squaremap', 'radarmasksm')
-    AddReplaceTexture('platform:/textures/graphics', 'radarmask1g', 'squaremap', 'radarmasksm')
+	AddReplaceTexture("platform:/textures/graphics", "radarmasksm", "squaremap", "radarmasksm")
+	AddReplaceTexture("platform:/textures/graphics", "radarmask1g", "squaremap", "radarmasksm")
 
-    SetMinimapComponentPosition('minimap', 'L', 'B', 0.0 + minimapOffset, -0.047, 0.1638, 0.183)
-    SetMinimapComponentPosition('minimap_mask', 'L', 'B', 0.0 + minimapOffset, 0.0, 0.128, 0.20)
-    SetMinimapComponentPosition('minimap_blur', 'L', 'B', -0.01 + minimapOffset, 0.025, 0.262, 0.300)
+	SetMinimapComponentPosition("minimap", "L", "B", 0.0 + minimapOffset, -0.047, 0.1638, 0.183)
+	SetMinimapComponentPosition("minimap_mask", "L", "B", 0.0 + minimapOffset, 0.0, 0.128, 0.20)
+	SetMinimapComponentPosition("minimap_blur", "L", "B", -0.01 + minimapOffset, 0.025, 0.262, 0.300)
 
-    SetBlipAlpha(GetNorthRadarBlip(), 0)
-    SetMinimapClipType(0)
+	SetBlipAlpha(GetNorthRadarBlip(), 0)
+	SetMinimapClipType(0)
 end
 
 ---@param coords vector3
 ---@return boolean
 ---@return table
 utility.get2DCoordFrom3DCoord = function(coords)
-    if not coords then return false, {} end
-    local onScreen, x, y = GetScreenCoordFromWorldCoord(coords.x, coords.y, coords.z)
-    return onScreen, { left = tostring(x * 100) .. "%", top = tostring(y * 100) .. "%" }
+	if not coords then
+		return false, {}
+	end
+	local onScreen, x, y = GetScreenCoordFromWorldCoord(coords.x, coords.y, coords.z)
+	return onScreen, { left = tostring(x * 100) .. "%", top = tostring(y * 100) .. "%" }
 end
 
 return utility
