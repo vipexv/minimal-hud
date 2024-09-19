@@ -4,7 +4,7 @@
   <br>
 </h1>
 
-<h4 align="center">A minimal hud built for FiveM based off the Prodigy 2.0 HUD.</h4>
+<h4 align="center">A minimal hud built for FiveM.</h4>
 
 <p align="center">
   <a href="https://badge.fury.io/js/electron-markdownify">
