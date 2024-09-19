@@ -98,6 +98,21 @@ utility.isFrameworkValid = function()
 	return validFrameworks[framework] ~= nil
 end
 
+-- Prevents the bigmap from staying active after the minimap is closed, since sometimes the bigmap is still active and stuck on the screen
+utility.preventBigmapFromStayingActive = function()
+	local timeout = 0
+	while true do
+		utility.debug("(utility:preventBigmapFromStayingActive) Running, timeout: ", timeout)
+		SetBigmapActive(false, false)
+		if timeout >= 10000 then
+			break
+		else
+			timeout = timeout + 1000
+		end
+		Wait(1000)
+	end
+end
+
 utility.setupMinimap = function()
 	utility.debug("(utility:setupMinimap) Setting up minimap.")
 	local defaultAspectRatio = 1920 / 1080
@@ -115,6 +130,7 @@ utility.setupMinimap = function()
 		Wait(100)
 	end
 
+	SetMinimapClipType(0)
 	AddReplaceTexture("platform:/textures/graphics", "radarmasksm", "squaremap", "radarmasksm")
 	AddReplaceTexture("platform:/textures/graphics", "radarmask1g", "squaremap", "radarmasksm")
 
@@ -123,7 +139,9 @@ utility.setupMinimap = function()
 	SetMinimapComponentPosition("minimap_blur", "L", "B", -0.01 + minimapOffset, 0.025, 0.262, 0.300)
 
 	SetBlipAlpha(GetNorthRadarBlip(), 0)
+	SetBigmapActive(true, false)
 	SetMinimapClipType(0)
+	CreateThread(utility.preventBigmapFromStayingActive)
 end
 
 ---@param coords vector3
