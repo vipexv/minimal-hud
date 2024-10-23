@@ -29,20 +29,17 @@ export function App() {
 
     debug(
       `(App) NUI message received: setVisible ${state}`,
-      `newState: ${newState}`
+      `newState: ${newState}`,
     );
   });
 
   useEffect(() => {
     fetchNui("uiLoaded")
       .then(
-        (res: {
-          config: ConfigInterface;
-          minimap: MinimapStateInterface;
-        }) => {
+        (res: { config: ConfigInterface; minimap: MinimapStateInterface }) => {
           setDebugMode(res.config.debug ?? false);
           setMinimapState(res.minimap);
-        }
+        },
       )
       .catch((err) => {
         console.error(err);

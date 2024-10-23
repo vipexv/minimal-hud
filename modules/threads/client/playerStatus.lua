@@ -70,9 +70,9 @@ function PlayerStatusThread:start(vehicleStatusThread, seatbeltLogic, framework)
 			local pedArmor = GetPedArmour(ped)
 			local pedHealthUnrestricted = math.floor(GetEntityHealth(ped) / GetEntityMaxHealth(ped) * 100)
 			local pedHealth = math.max(0, math.min(pedHealthUnrestricted, 100))
-			local pedHunger = framework and framework:getPlayerHunger() or "disabled"
-			local pedThirst = framework and framework:getPlayerThirst() or "disabled"
-			local pedStress = framework and framework:getPlayerStress() or "disabled"
+			local pedHunger = framework and framework:getPlayerHunger() or nil
+			local pedThirst = framework and framework:getPlayerThirst() or nil
+			local pedStress = framework and framework:getPlayerStress() or nil
 
 			local isInVehicle = IsPedInAnyVehicle(ped, false)
 			local isSeatbeltOn = config.useBuiltInSeatbeltLogic and seatbeltLogic.seatbeltState

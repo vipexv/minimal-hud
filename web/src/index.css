@@ -8,34 +8,33 @@
 @import url("./fonts.css");
 
 :root {
-    font-family: Geist, ui-sans-serif, system-ui, sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-        "Noto Color Emoji";
-    line-height: 1.5;
-    font-weight: 500;
-    font-synthesis: none;
-    color-scheme: only light !important;
-    overflow: hidden !important;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: transparent !important;
-    font-synthesis: none;
-    user-select: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    outline: none !important;
-    -moz-osx-font-smoothing: grayscale;
+  font-family: Geist, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  line-height: 1.5;
+  font-weight: 500;
+  font-synthesis: none;
+  color-scheme: only light !important;
+  overflow: hidden !important;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: transparent !important;
+  font-synthesis: none;
+  user-select: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  outline: none !important;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 @layer base {
-    * {
-        @apply border-border;
-    }
+  * {
+    @apply border-border;
+  }
 }

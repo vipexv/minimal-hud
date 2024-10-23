@@ -17,20 +17,16 @@ export const StatBar = ({
   vertical = false,
   ...props
 }: StatBarProps) => {
-  const percentage = useMemo(
-    () => (value / maxValue) * 100,
-    [value, maxValue]
-  );
+  const percentage = useMemo(() => (value / maxValue) * 100, [value, maxValue]);
 
   return (
     <div
-      className={`flex ${vertical ? "h-[3dvh]" : "w-full"
-        } items-center gap-1 4k:gap-2`}
+      className={`flex ${
+        vertical ? "h-[3dvh]" : "w-full"
+      } items-center gap-1 4k:gap-2`}
       {...props}
     >
-      {!vertical && (
-        <Icon className="text-white/70 4k:text-2xl 2k:text-xl" />
-      )}
+      {!vertical && <Icon className="text-white/70 4k:text-2xl 2k:text-xl" />}
       {!vertical && (
         <p
           className="text-xs w-[20px] 4k:text-base 2k:text-sm text-center font-bold"
@@ -42,23 +38,23 @@ export const StatBar = ({
         </p>
       )}
       <div
-        className={`relative ${vertical
-          ? "h-full 2k:w-[6px] w-[4px] 4k:w-[8px] rounded-full"
-          : "w-full ml-1 h-2 2k:h-3"
-          } bg-black/30  rounded-[1px] overflow-hidden`}
+        className={`relative ${
+          vertical
+            ? "h-full 2k:w-[6px] w-[4px] 4k:w-[8px] rounded-full"
+            : "w-full ml-1 h-2 2k:h-3"
+        } bg-black/30  rounded-[1px] overflow-hidden`}
       >
         <div
-          className={`absolute ${vertical ? "bottom-0 w-full" : "left-0 h-full"
-            } transition-all rounded-[1px] ease-in-out`}
+          className={`absolute ${
+            vertical ? "bottom-0 w-full" : "left-0 h-full"
+          } transition-all bg-red-500 rounded-[1px] ease-in-out`}
           style={{
             backgroundColor: color,
             [vertical ? "height" : "width"]: `${percentage}%`,
           }}
         />
       </div>
-      {vertical && (
-        <Icon className="text-white/70 4k:text-2xl 2k:text-xl" />
-      )}
+      {vertical && <Icon className="text-white/70 4k:text-2xl 2k:text-xl" />}
     </div>
   );
 };
@@ -85,14 +81,12 @@ export const StatBarSegmented = ({
         if (value >= segmentMaxValue) {
           return 100;
         } else if (value > (i * 100) / segments) {
-          return (
-            ((value - (i * 100) / segments) / segmentWidth) * 100
-          );
+          return ((value - (i * 100) / segments) / segmentWidth) * 100;
         } else {
           return 0;
         }
       }),
-    [value, segments, segmentWidth]
+    [value, segments, segmentWidth],
   );
 
   return (
@@ -110,7 +104,7 @@ export const StatBarSegmented = ({
             key={index}
             width="100%"
             height="100%"
-            className={"rounded-full"}
+            className={"rounded-full "}
             viewBox="0 0 100 24"
             preserveAspectRatio="none"
           >

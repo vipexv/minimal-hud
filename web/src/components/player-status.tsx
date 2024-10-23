@@ -1,7 +1,7 @@
 import { useNuiEvent } from "@/hooks/useNuiEvent";
 import { useMinimapState } from "@/states/minimap";
 import { PlayerStateInterface, usePlayerStateStore } from "@/states/player";
-import React, { useCallback } from "preact/compat";
+import React, { useCallback, useMemo } from "preact/compat";
 import { BiSolidShieldAlt2 } from "react-icons/bi";
 import { FaBottleWater, FaBrain } from "react-icons/fa6";
 import { IoFastFood } from "react-icons/io5";
@@ -21,78 +21,70 @@ const PlayerStatus = () => {
         return prevState;
       });
     },
-    [setPlayerState]
+    [setPlayerState],
   );
 
-  useNuiEvent<PlayerStateInterface>(
-    "setPlayerState",
-    handlePlayerStateUpdate
-  );
+  useNuiEvent<PlayerStateInterface>("setPlayerState", handlePlayerStateUpdate);
+
+  const isUsingFramework = useMemo(() => {
+    return playerState.hunger !== undefined || playerState.thirst !== undefined;
+  }, [playerState]);
 
   return (
-    <div
-      className={"absolute flex items-end justify-center"}
-      style={{
-        top: minimap.top + "%",
-        left: minimap.left + "%",
-        width: minimap.width + "px",
-        height: minimap.height + "px",
-      }}
-    >
+    <>
       <div
-        className={
-          "w-full flex relative gap-1 items-center justify-center -mb-12 2k:-mb-14 4k:-mb-16 mr-2"
-        }
+        class="absolute items-end justify-center border-red-500 z-20 flex"
+        style={{
+          transform: "perspective(1000px) rotateY(12deg)",
+          backfaceVisibility: "hidden",
+          transformStyle: "preserve-3d",
+          willChange: "transform",
+          top: minimap.top + "%",
+          left: minimap.left + "%",
+          minWidth: minimap.width + "px",
+          height: minimap.height + 50 + "px",
+        }}
       >
         <div
-          className={
-            "flex flex-col w-full items-center justify-center gap-1"
-          }
+          className={"w-full flex relative gap-3 items-center justify-center"}
         >
-          <StatBarSegmented
-            Icon={BiSolidShieldAlt2}
-            value={playerState.armor}
-            color="#10aef5"
-          />
-          <StatBar
-            Icon={TiHeartFullOutline}
-            value={playerState.health}
-            maxValue={100}
-          />
-        </div>
-        {typeof playerState.hunger === "number" &&
-          typeof playerState.thirst === "number" && (
+          <div
+            className={"flex flex-col w-full items-center justify-center gap-1"}
+          >
+            <StatBarSegmented
+              Icon={BiSolidShieldAlt2}
+              value={playerState.armor}
+              color="#10aef5"
+            />
+            <StatBar
+              Icon={TiHeartFullOutline}
+              value={playerState.health}
+              maxValue={100}
+            />
+          </div>
+          {isUsingFramework && (
             <>
-              <div
-                className={
-                  "flex gap-3 items-center justify-start absolute 2k:-right-36 4k:-right-52 -right-28 w-[30%] h-[4dvh]"
-                }
-              >
-                <StatBar
-                  Icon={IoFastFood}
-                  value={playerState.hunger}
-                  vertical
-                />
-                <StatBar
-                  Icon={FaBottleWater}
-                  value={playerState.thirst}
-                  color="#10aef5"
-                  vertical
-                />
-                {typeof playerState.stress === "number" &&
-                  playerState.stress > 0 && (
-                    <StatBar
-                      Icon={FaBrain}
-                      value={playerState.stress}
-                      color="#ff5b57"
-                      vertical
-                    />
-                  )}
-              </div>
+              <StatBar Icon={IoFastFood} value={playerState.hunger} vertical />
+              <StatBar
+                Icon={FaBottleWater}
+                value={playerState.thirst}
+                color="#10aef5"
+                vertical
+              />
+              {typeof playerState.stress === "number" &&
+                playerState.stress > 0 && (
+                  <StatBar
+                    Icon={FaBrain}
+                    value={playerState.stress}
+                    color="#ff5b57"
+                    vertical
+                  />
+                )}
             </>
           )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

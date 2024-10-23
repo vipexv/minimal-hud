@@ -22,18 +22,18 @@ const CarHud = React.memo(function CarHud() {
         return prevState;
       });
     },
-    [setVehicleState]
+    [setVehicleState],
   );
 
   useNuiEvent<VehicleStateInterface>(
     "setVehicleState",
-    handleVehicleStateUpdate
+    handleVehicleStateUpdate,
   );
 
   const content = useMemo(() => {
     if (!playerState.isInVehicle) {
       debug(
-        "(CarHud) Returning with no children since the player is not in a vehicle."
+        "(CarHud) Returning with no children since the player is not in a vehicle.",
       );
       return null;
     }
@@ -41,8 +41,14 @@ const CarHud = React.memo(function CarHud() {
     return (
       <div
         className={
-          "absolute bottom-1 right-1 w-[20dvw] h-[30dvh] flex-col items-center flex justify-center gap-2"
+          "absolute bottom-8 right-16 w-fit h-fit mb-4 flex-col items-center flex justify-center gap-2"
         }
+        style={{
+          transform: "perspective(1000px) rotateY(-12deg)",
+          backfaceVisibility: "hidden",
+          transformStyle: "preserve-3d",
+          willChange: "transform",
+        }}
       >
         <Speedometer
           rpm={vehicleState.rpm}
