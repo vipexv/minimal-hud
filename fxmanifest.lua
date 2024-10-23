@@ -1,10 +1,10 @@
----@diagnostic disable: undefined-global
+--@diagnostic disable: undefined-global
 fx_version("cerulean")
 game("gta5")
 
 name("minimal-hud")
 author("vipex <discord:vipex.v>")
-version("1.0.6")
+version("1.0.7")
 repository("https://github.com/vipexv/minimal-hud")
 
 shared_scripts({
@@ -41,3 +41,4 @@ files({
 
 lua54("yes")
 use_experimental_fxv2_oal("yes")
+nui_callback_strict_mode("true")
