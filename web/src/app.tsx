@@ -11,6 +11,7 @@ import type { ConfigInterface } from "./types/config";
 import { debug, setDebugMode } from "./utils/debug";
 import { fetchNui } from "./utils/fetchNui";
 import { isEnvBrowser } from "./utils/misc";
+import { useSetCompassLocation } from "./states/compass-location";
 
 if (isEnvBrowser()) {
   const body = document.body;
@@ -22,6 +23,7 @@ if (isEnvBrowser()) {
 export function App() {
   const [visible, setVisible] = useState(true);
   const setMinimapState = useSetMinimapState();
+  const setCompassLocation = useSetCompassLocation();
 
   useNuiEvent("setVisible", (state) => {
     const newState = state === "toggle" ? !visible : state;
@@ -39,6 +41,7 @@ export function App() {
         (res: { config: ConfigInterface; minimap: MinimapStateInterface }) => {
           setDebugMode(res.config.debug ?? false);
           setMinimapState(res.minimap);
+          setCompassLocation(res.config.compassLocation);
         },
       )
       .catch((err) => {
