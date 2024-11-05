@@ -9,7 +9,7 @@ VehicleStatusThread.__index = VehicleStatusThread
 function VehicleStatusThread.new(playerStatus, seatbeltLogic)
 	local self = setmetatable({}, VehicleStatusThread)
 	self.playerStatus = playerStatus
-	self.seatbeltLogic = seatbeltLogic
+	self.seatbelt = seatbeltLogic
 
 	SetHudComponentPosition(6, 999999.0, 999999.0) -- VEHICLE NAME
 	SetHudComponentPosition(7, 999999.0, 999999.0) -- AREA NAME
@@ -23,7 +23,6 @@ function VehicleStatusThread:start()
 	CreateThread(function()
 		local ped = PlayerPedId()
 		local playerStatusThread = self.playerStatus
-		local seatbelt = self.seatbeltLogic
 		local convertRpmToPercentage = utility.convertRpmToPercentage
 		local convertEngineHealthToPercentage = utility.convertEngineHealthToPercentage
 
@@ -51,7 +50,11 @@ function VehicleStatusThread:start()
 			Wait(120)
 		end
 
-		seatbelt:toggle(false)
+		if self.seatbelt then
+			debug("(vehicleStatusThread) seatbelt found, toggling to false")
+			self.seatbelt:toggle(false)
+		end
+
 		playerStatusThread:setIsVehicleThreadRunning(false)
 		debug("(vehicleStatusThread) Vehicle status thread ended.")
 	end)
