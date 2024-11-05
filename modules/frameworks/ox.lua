@@ -10,8 +10,8 @@ function oxFramework.new()
 	self.values = {}
 
 	AddEventHandler("ox:statusTick", function(data)
-		self.values.hunger = data.hunger
-		self.values.thirst = data.thirst
+		self.values.hunger = 100 - data.hunger
+		self.values.thirst = 100 - data.thirst
 		self.values.stress = data.stress
 	end)
 
