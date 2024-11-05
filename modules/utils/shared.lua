@@ -65,6 +65,10 @@ utility.debug = function(...)
 		return
 	end
 
+	local info = debug.getinfo(2, "Sl") -- Get caller info
+	local line = info.currentline or "?"
+	local source = info.short_src or "?"
+
 	local args = { ... }
 	local append = ""
 
@@ -72,8 +76,26 @@ utility.debug = function(...)
 		append = append .. " " .. tostring(v)
 	end
 
-	local template = "^3[%s]^0%s"
-	local message = template:format(currentResourceName, append)
+	local template = "^3[%s:%d]^0%s"
+	local message = template:format(source, line, append)
+	print(message)
+end
+
+---@param ... any
+utility.warn = function(...)
+	local info = debug.getinfo(2, "Sl") -- Get caller info
+	local line = info.currentline or "?"
+	local source = info.short_src or "?"
+
+	local args = { ... }
+	local append = ""
+
+	for _, v in ipairs(args) do
+		append = append .. " " .. tostring(v)
+	end
+
+	local template = "^1[WARNING | %s:%d]^3%s^0"
+	local message = template:format(source, line, append)
 	print(message)
 end
 
