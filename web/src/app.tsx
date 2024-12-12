@@ -11,7 +11,8 @@ import type { ConfigInterface } from "./types/config";
 import { debug, setDebugMode } from "./utils/debug";
 import { fetchNui } from "./utils/fetchNui";
 import { isEnvBrowser } from "./utils/misc";
-import { useSetCompassLocation } from "./states/compass-location";
+import { useCompassLocationStore } from "./states/compass-location";
+import compass from "./components/compass";
 
 if (isEnvBrowser()) {
   const body = document.body;
@@ -23,7 +24,7 @@ if (isEnvBrowser()) {
 export function App() {
   const [visible, setVisible] = useState(true);
   const setMinimapState = useSetMinimapState();
-  const setCompassLocation = useSetCompassLocation();
+  const [compassLocation, setCompassLocation] = useCompassLocationStore();
 
   useNuiEvent("setVisible", (state) => {
     const newState = state === "toggle" ? !visible : state;
@@ -61,7 +62,11 @@ export function App() {
     <>
       <PlayerStatus />
       <CarHud />
-      <Compass />
+      {compassLocation !== "hidden" && (
+        <>
+          <Compass />
+        </>
+      )}
     </>
   );
 }
