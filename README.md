@@ -1,16 +1,14 @@
 <h1 align="center">
- Disclamer
+ Disclaimer
   <br>
 </h1>
 
 
-<p align="center">
+<p>
   I no longer maintain or support this project, one of the bigger reasons is due to the take-down requests sent to the forums, which ended up to it being taken down.
 
   But someone has forked this project and has added some cool new features, check it out here: [ThatMadCap/minimal-hud-restyle](https://github.com/ThatMadCap/minimal-hud-restyle)
 </p>
-
-
 
 <h1 align="center">
   Minimal HUD
